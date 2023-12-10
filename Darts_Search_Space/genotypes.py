@@ -105,7 +105,7 @@ Cell_4 =  Normal_Genotype(normal=[('dil_conv_3x3', 0), ('max_pool_3x3', 1), ('ec
 Cell_5 =  Reduce_Genotype(reduce=[('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('skip_connect', 2), ('avg_pool_3x3', 0), ('max_pool_3x3', 3), ('skip_connect', 2), ('avg_pool_3x3', 4), ('dil_conv_3x3', 3)], reduce_concat=range(2, 6))
 Cell_6 =  Normal_Genotype(normal=[('cbam', 1), ('dil_conv_3x3', 0), ('avg_pool_3x3', 2), ('sep_conv_3x3', 0), ('cbam', 0), ('max_pool_3x3', 2), ('sep_conv_3x3', 4), ('skip_connect', 3)], normal_concat=range(2, 6))
 Cell_7 =  Normal_Genotype(normal=[('eca', 1), ('eca', 0), ('cbam', 2), ('avg_pool_3x3', 0), ('dil_conv_3x3', 3), ('cbam', 1), ('skip_connect', 2), ('dil_conv_3x3', 4)], normal_concat=range(2, 6))
-
+#123
 AGNAS = [Cell_0, Cell_2, Cell_3, Cell_5, Cell_6]
 
 
