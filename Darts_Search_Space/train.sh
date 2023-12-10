@@ -1,0 +1,1 @@
+nohup python train.py --batch_size 8 --layers 2 --auxiliary >/sdb_new/wz/NAS/AGNAS/Darts_Search_Space/train.out 2>&1 &

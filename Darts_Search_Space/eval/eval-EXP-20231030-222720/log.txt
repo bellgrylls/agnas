@@ -1,0 +1,1791 @@
+2023-10-30 22:27:22,218 gpu device = 0
+2023-10-30 22:27:22,218 args = Namespace(data='/sdb_new/wz/dataset/ISIC-2017', dataset='isic2017', batch_size=8, learning_rate=0.025, momentum=0.9, weight_decay=0.0003, report_freq=50, gpu=0, epochs=200, init_channels=36, layers=6, model_path='saved_models', auxiliary=False, auxiliary_weight=0.4, cutout=True, cutout_length=16, drop_path_prob=0.2, save='eval-EXP-20231030-222720', seed=1, train_portion=0.7, arch='AGNAS', grad_clip=5)
+2023-10-30 22:27:22,219 genotype = [Normal_Genotype(normal=[('dil_conv_3x3', 0), ('avg_pool_3x3', 1), ('dil_conv_5x5', 2), ('skip_connect', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 0), ('sep_conv_3x3', 3), ('dil_conv_3x3', 2)], normal_concat=range(2, 6)), Reduce_Genotype(reduce=[('max_pool_3x3', 1), ('sep_conv_3x3', 0), ('dil_conv_5x5', 0), ('max_pool_3x3', 2), ('dil_conv_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_5x5', 4), ('dil_conv_3x3', 0)], reduce_concat=range(2, 6)), Normal_Genotype(normal=[('max_pool_3x3', 0), ('dil_conv_3x3', 1), ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_3x3', 3), ('skip_connect', 2), ('dil_conv_5x5', 4), ('sep_conv_5x5', 3)], normal_concat=range(2, 6)), Reduce_Genotype(reduce=[('dil_conv_5x5', 0), ('skip_connect', 1), ('sep_conv_5x5', 2), ('dil_conv_3x3', 0), ('dil_conv_5x5', 3), ('max_pool_3x3', 0), ('sep_conv_3x3', 4), ('sep_conv_3x3', 3)], reduce_concat=range(2, 6)), Normal_Genotype(normal=[('dil_conv_5x5', 0), ('skip_connect', 1), ('dil_conv_5x5', 2), ('sep_conv_5x5', 0), ('sep_conv_3x3', 3), ('avg_pool_3x3', 0), ('dil_conv_5x5', 4), ('sep_conv_5x5', 0)], normal_concat=range(2, 6))]
+2023-10-30 22:27:26,568 NetworkCIFAR(
+  (stem): Sequential(
+    (0): Conv2d(3, 108, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): BatchNorm2d(108, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (cells): ModuleList(
+    (0): Cell(
+      (preprocess0): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(108, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(108, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): AvgPool2d(kernel_size=3, stride=1, padding=1)
+        (2): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (3): Identity()
+        (4): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (6): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=36, bias=False)
+            (6): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (1): Cell(
+      (preprocess0): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(108, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(144, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): AvgPool2d(kernel_size=3, stride=1, padding=1)
+        (2): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (3): Identity()
+        (4): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (6): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=36, bias=False)
+            (6): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(36, 36, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), groups=36, bias=False)
+            (2): Conv2d(36, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(36, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (2): Cell(
+      (preprocess0): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(144, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(144, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+        (1): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=72, bias=False)
+            (6): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (2): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(5, 5), stride=(2, 2), padding=(4, 4), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (3): MaxPool2d(kernel_size=3, stride=1, padding=1, dilation=1, ceil_mode=False)
+        (4): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(2, 2), padding=(2, 2), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(5, 5), stride=(2, 2), padding=(4, 4), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (6): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(72, 72, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=72, bias=False)
+            (6): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(2, 2), padding=(2, 2), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (3): Cell(
+      (preprocess0): FactorizedReduce(
+        (relu): ReLU()
+        (conv_1): Conv2d(144, 36, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (conv_2): Conv2d(144, 36, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(288, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): MaxPool2d(kernel_size=3, stride=1, padding=1, dilation=1, ceil_mode=False)
+        (1): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (2): AvgPool2d(kernel_size=3, stride=1, padding=1)
+        (3): MaxPool2d(kernel_size=3, stride=1, padding=1, dilation=1, ceil_mode=False)
+        (4): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(72, 72, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=72, bias=False)
+            (6): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): Identity()
+        (6): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(72, 72, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=72, bias=False)
+            (2): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(72, 72, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=72, bias=False)
+            (6): Conv2d(72, 72, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (4): Cell(
+      (preprocess0): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(288, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(288, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(2, 2), padding=(4, 4), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): FactorizedReduce(
+          (relu): ReLU()
+          (conv_1): Conv2d(144, 72, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (conv_2): Conv2d(144, 72, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (bn): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (2): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (3): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(3, 3), stride=(2, 2), padding=(2, 2), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (4): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+        (6): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+    (5): Cell(
+      (preprocess0): FactorizedReduce(
+        (relu): ReLU()
+        (conv_1): Conv2d(288, 72, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (conv_2): Conv2d(288, 72, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (bn): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (preprocess1): ReLUConvBN(
+        (op): Sequential(
+          (0): ReLU()
+          (1): Conv2d(576, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (2): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (_ops): ModuleList(
+        (0): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): Identity()
+        (2): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (3): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (4): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (5): AvgPool2d(kernel_size=3, stride=1, padding=1)
+        (6): DilConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(4, 4), dilation=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (7): SepConv(
+          (op): Sequential(
+            (0): ReLU()
+            (1): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (2): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (3): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (4): ReLU()
+            (5): Conv2d(144, 144, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2), groups=144, bias=False)
+            (6): Conv2d(144, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (7): BatchNorm2d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+      )
+    )
+  )
+  (global_pooling): AdaptiveAvgPool2d(output_size=1)
+  (classifier): Linear(in_features=576, out_features=3, bias=True)
+)
+2023-10-30 22:27:26,585 param size = 0.849927MB
+2023-10-30 22:27:26,601 epoch 0 lr 2.499692e-02
+2023-10-30 22:27:31,484 train 000 1.135704e+00 12.500000
+2023-10-30 22:28:15,485 train 050 8.285886e-01 67.647059
+2023-10-30 22:29:02,369 train 100 7.113116e-01 70.915842
+2023-10-30 22:29:40,928 train 150 6.822559e-01 70.529801
+2023-10-30 22:30:06,495 train_acc 69.285714
+2023-10-30 22:30:12,220 valid 000 1.962060e+00 25.000000
+2023-10-30 22:32:23,053 valid 050 2.923469e+00 26.715686
+2023-10-30 22:33:29,009 valid_acc 26.666667
+2023-10-30 22:33:29,085 best_valid_acc 26.666667
+2023-10-30 22:33:29,156 epoch 1 lr 2.498921e-02
+2023-10-30 22:33:30,528 train 000 5.885164e-01 62.500000
+2023-10-30 22:34:16,540 train 050 5.540834e-01 76.225490
+2023-10-30 22:35:06,419 train 100 5.726604e-01 73.886139
+2023-10-30 22:35:49,324 train 150 5.768036e-01 73.509934
+2023-10-30 22:36:09,946 train_acc 73.071429
+2023-10-30 22:36:15,122 valid 000 2.519069e+00 62.500000
+2023-10-30 22:38:27,397 valid 050 2.610043e+00 55.637255
+2023-10-30 22:39:33,019 valid_acc 55.333333
+2023-10-30 22:39:33,067 best_valid_acc 55.333333
+2023-10-30 22:39:33,135 epoch 2 lr 2.497842e-02
+2023-10-30 22:39:35,928 train 000 4.462497e-01 75.000000
+2023-10-30 22:40:19,212 train 050 6.123783e-01 69.852941
+2023-10-30 22:41:04,386 train 100 5.881098e-01 71.039604
+2023-10-30 22:41:56,421 train 150 5.852399e-01 70.943709
+2023-10-30 22:42:15,530 train_acc 72.142857
+2023-10-30 22:42:19,426 valid 000 2.972207e+00 25.000000
+2023-10-30 22:44:38,171 valid 050 2.825150e+00 51.225490
+2023-10-30 22:45:43,595 valid_acc 51.000000
+2023-10-30 22:45:43,595 best_valid_acc 55.333333
+2023-10-30 22:45:43,660 epoch 3 lr 2.496455e-02
+2023-10-30 22:45:45,877 train 000 1.761312e-01 100.000000
+2023-10-30 22:46:29,797 train 050 6.002950e-01 73.284314
+2023-10-30 22:47:12,912 train 100 5.936140e-01 72.153465
+2023-10-30 22:47:59,406 train 150 5.796468e-01 72.682119
+2023-10-30 22:48:20,616 train_acc 73.285714
+2023-10-30 22:48:27,439 valid 000 1.841809e+00 62.500000
+2023-10-30 22:50:38,784 valid 050 2.750863e+00 56.127451
+2023-10-30 22:51:44,749 valid_acc 55.833333
+2023-10-30 22:51:44,812 best_valid_acc 55.833333
+2023-10-30 22:51:44,874 epoch 4 lr 2.494761e-02
+2023-10-30 22:51:47,173 train 000 3.517660e-01 87.500000
+2023-10-30 22:52:36,688 train 050 5.709561e-01 68.872549
+2023-10-30 22:53:23,025 train 100 5.693944e-01 70.792079
+2023-10-30 22:54:10,361 train 150 5.737871e-01 71.109272
+2023-10-30 22:54:29,324 train_acc 72.000000
+2023-10-30 22:54:36,195 valid 000 2.465401e+00 37.500000
+2023-10-30 22:56:44,584 valid 050 2.865090e+00 35.539216
+2023-10-30 22:57:51,713 valid_acc 38.166667
+2023-10-30 22:57:51,713 best_valid_acc 55.833333
+2023-10-30 22:57:51,776 epoch 5 lr 2.492759e-02
+2023-10-30 22:57:53,611 train 000 2.509427e-01 87.500000
+2023-10-30 22:58:42,207 train 050 5.799862e-01 72.058824
+2023-10-30 22:59:28,774 train 100 5.554978e-01 71.905941
+2023-10-30 23:00:13,866 train 150 5.630066e-01 71.523179
+2023-10-30 23:00:33,539 train_acc 71.785714
+2023-10-30 23:00:36,474 valid 000 3.936985e+00 37.500000
+2023-10-30 23:02:46,461 valid 050 2.794683e+00 42.156863
+2023-10-30 23:03:56,360 valid_acc 43.333333
+2023-10-30 23:03:56,361 best_valid_acc 55.833333
+2023-10-30 23:03:56,415 epoch 6 lr 2.490452e-02
+2023-10-30 23:03:59,670 train 000 5.248147e-01 62.500000
+2023-10-30 23:04:46,805 train 050 5.704594e-01 73.284314
+2023-10-30 23:05:32,434 train 100 5.465770e-01 74.133663
+2023-10-30 23:06:14,197 train 150 5.522122e-01 74.254967
+2023-10-30 23:06:34,181 train_acc 73.714286
+2023-10-30 23:06:40,789 valid 000 1.875729e+00 75.000000
+2023-10-30 23:08:49,965 valid 050 2.991110e+00 54.411765
+2023-10-30 23:09:58,826 valid_acc 56.833333
+2023-10-30 23:09:58,892 best_valid_acc 56.833333
+2023-10-30 23:09:58,946 epoch 7 lr 2.487838e-02
+2023-10-30 23:10:01,471 train 000 5.919830e-01 75.000000
+2023-10-30 23:10:47,710 train 050 5.692647e-01 72.794118
+2023-10-30 23:11:29,881 train 100 5.781779e-01 71.782178
+2023-10-30 23:12:19,085 train 150 5.627597e-01 72.847682
+2023-10-30 23:12:40,195 train_acc 73.071429
+2023-10-30 23:12:46,235 valid 000 2.493674e+00 62.500000
+2023-10-30 23:15:01,947 valid 050 2.711972e+00 57.843137
+2023-10-30 23:16:03,452 valid_acc 55.666667
+2023-10-30 23:16:03,453 best_valid_acc 56.833333
+2023-10-30 23:16:03,523 epoch 8 lr 2.484919e-02
+2023-10-30 23:16:05,047 train 000 5.563318e-01 75.000000
+2023-10-30 23:16:48,867 train 050 5.632807e-01 72.794118
+2023-10-30 23:17:32,207 train 100 5.704945e-01 72.153465
+2023-10-30 23:18:25,062 train 150 5.597058e-01 73.344371
+2023-10-30 23:18:45,840 train_acc 73.928571
+2023-10-30 23:18:51,957 valid 000 4.204933e+00 37.500000
+2023-10-30 23:21:04,814 valid 050 2.926446e+00 58.088235
+2023-10-30 23:22:10,174 valid_acc 57.000000
+2023-10-30 23:22:10,249 best_valid_acc 57.000000
+2023-10-30 23:22:10,318 epoch 9 lr 2.481695e-02
+2023-10-30 23:22:12,340 train 000 2.927905e-01 87.500000
+2023-10-30 23:22:58,226 train 050 5.422948e-01 75.000000
+2023-10-30 23:23:44,872 train 100 5.502788e-01 74.257426
+2023-10-30 23:24:27,368 train 150 5.577924e-01 72.599338
+2023-10-30 23:24:48,638 train_acc 72.714286
+2023-10-30 23:24:53,253 valid 000 6.192040e+00 12.500000
+2023-10-30 23:27:07,526 valid 050 3.187532e+00 55.882353
+2023-10-30 23:28:11,682 valid_acc 56.666667
+2023-10-30 23:28:11,683 best_valid_acc 57.000000
+2023-10-30 23:28:11,743 epoch 10 lr 2.478167e-02
+2023-10-30 23:28:13,981 train 000 5.827667e-01 75.000000
+2023-10-30 23:28:59,166 train 050 5.228427e-01 74.754902
+2023-10-30 23:29:42,623 train 100 5.557367e-01 73.019802
+2023-10-30 23:30:25,953 train 150 5.453089e-01 73.509934
+2023-10-30 23:30:51,499 train_acc 73.142857
+2023-10-30 23:30:54,963 valid 000 4.360033e+00 37.500000
+2023-10-30 23:33:14,149 valid 050 3.041346e+00 40.931373
+2023-10-30 23:34:24,852 valid_acc 40.833333
+2023-10-30 23:34:24,853 best_valid_acc 57.000000
+2023-10-30 23:34:24,916 epoch 11 lr 2.474336e-02
+2023-10-30 23:34:27,585 train 000 3.494441e-01 75.000000
+2023-10-30 23:35:12,876 train 050 5.872169e-01 71.813725
+2023-10-30 23:35:57,234 train 100 5.622736e-01 73.019802
+2023-10-30 23:36:44,095 train 150 5.636361e-01 73.427152
+2023-10-30 23:37:02,838 train_acc 73.285714
+2023-10-30 23:37:09,960 valid 000 3.997010e+00 37.500000
+2023-10-30 23:39:19,219 valid 050 2.894851e+00 51.715686
+2023-10-30 23:40:22,502 valid_acc 50.500000
+2023-10-30 23:40:22,502 best_valid_acc 57.000000
+2023-10-30 23:40:22,574 epoch 12 lr 2.470204e-02
+2023-10-30 23:40:23,877 train 000 6.474817e-01 62.500000
+2023-10-30 23:41:11,902 train 050 5.541248e-01 73.039216
+2023-10-30 23:41:56,541 train 100 5.436860e-01 73.638614
+2023-10-30 23:42:41,663 train 150 5.478641e-01 73.592715
+2023-10-30 23:43:07,370 train_acc 73.500000
+2023-10-30 23:43:11,643 valid 000 2.476068e+00 37.500000
+2023-10-30 23:45:16,051 valid 050 3.596536e+00 20.098039
+2023-10-30 23:46:24,691 valid_acc 20.166667
+2023-10-30 23:46:24,691 best_valid_acc 57.000000
+2023-10-30 23:46:24,763 epoch 13 lr 2.465770e-02
+2023-10-30 23:46:27,573 train 000 5.983828e-01 75.000000
+2023-10-30 23:47:12,814 train 050 5.434987e-01 75.245098
+2023-10-30 23:47:59,098 train 100 5.658591e-01 72.896040
+2023-10-30 23:48:45,037 train 150 5.567498e-01 73.344371
+2023-10-30 23:49:06,720 train_acc 73.142857
+2023-10-30 23:49:13,358 valid 000 4.961990e+00 25.000000
+2023-10-30 23:51:28,338 valid 050 3.026529e+00 55.637255
+2023-10-30 23:52:24,036 valid_acc 56.833333
+2023-10-30 23:52:24,037 best_valid_acc 57.000000
+2023-10-30 23:52:24,110 epoch 14 lr 2.461037e-02
+2023-10-30 23:52:25,324 train 000 3.285381e-01 100.000000
+2023-10-30 23:53:11,108 train 050 5.579894e-01 71.078431
+2023-10-30 23:53:53,600 train 100 5.526373e-01 73.019802
+2023-10-30 23:54:44,325 train 150 5.422378e-01 73.923841
+2023-10-30 23:55:06,461 train_acc 74.071429
+2023-10-30 23:55:11,628 valid 000 2.720655e+00 62.500000
+2023-10-30 23:57:22,769 valid 050 3.307240e+00 46.813725
+2023-10-30 23:58:31,535 valid_acc 48.500000
+2023-10-30 23:58:31,535 best_valid_acc 57.000000
+2023-10-30 23:58:31,597 epoch 15 lr 2.456005e-02
+2023-10-30 23:58:33,644 train 000 5.160217e-01 75.000000
+2023-10-30 23:59:20,919 train 050 5.687597e-01 73.039216
+2023-10-31 00:00:04,740 train 100 5.555931e-01 72.772277
+2023-10-31 00:00:50,628 train 150 5.446158e-01 73.758278
+2023-10-31 00:01:10,110 train_acc 73.500000
+2023-10-31 00:01:15,186 valid 000 4.282214e+00 37.500000
+2023-10-31 00:03:31,968 valid 050 3.008137e+00 51.960784
+2023-10-31 00:04:35,590 valid_acc 52.833333
+2023-10-31 00:04:35,590 best_valid_acc 57.000000
+2023-10-31 00:04:35,661 epoch 16 lr 2.450675e-02
+2023-10-31 00:04:38,197 train 000 1.197503e+00 25.000000
+2023-10-31 00:05:20,202 train 050 5.623552e-01 71.568627
+2023-10-31 00:06:08,907 train 100 5.438766e-01 73.762376
+2023-10-31 00:06:50,586 train 150 5.458039e-01 73.841060
+2023-10-31 00:07:15,856 train_acc 73.571429
+2023-10-31 00:07:19,571 valid 000 2.796214e+00 62.500000
+2023-10-31 00:09:36,537 valid 050 3.067479e+00 52.450980
+2023-10-31 00:10:38,854 valid_acc 53.333333
+2023-10-31 00:10:38,855 best_valid_acc 57.000000
+2023-10-31 00:10:38,936 epoch 17 lr 2.445049e-02
+2023-10-31 00:10:41,069 train 000 3.258507e-01 87.500000
+2023-10-31 00:11:23,906 train 050 6.004045e-01 67.401961
+2023-10-31 00:12:15,236 train 100 5.664029e-01 70.915842
+2023-10-31 00:13:00,111 train 150 5.603107e-01 72.019868
+2023-10-31 00:13:20,836 train_acc 72.500000
+2023-10-31 00:13:24,623 valid 000 4.193466e+00 37.500000
+2023-10-31 00:15:33,434 valid 050 2.867699e+00 54.166667
+2023-10-31 00:16:49,054 valid_acc 54.000000
+2023-10-31 00:16:49,055 best_valid_acc 57.000000
+2023-10-31 00:16:49,145 epoch 18 lr 2.439128e-02
+2023-10-31 00:16:53,724 train 000 5.179276e-01 62.500000
+2023-10-31 00:17:42,773 train 050 5.632302e-01 74.019608
+2023-10-31 00:18:25,831 train 100 5.615460e-01 73.391089
+2023-10-31 00:19:08,872 train 150 5.485205e-01 73.923841
+2023-10-31 00:19:32,117 train_acc 73.571429
+2023-10-31 00:19:37,696 valid 000 4.005662e+00 37.500000
+2023-10-31 00:21:43,943 valid 050 2.994624e+00 53.921569
+2023-10-31 00:22:51,732 valid_acc 54.166667
+2023-10-31 00:22:51,733 best_valid_acc 57.000000
+2023-10-31 00:22:51,804 epoch 19 lr 2.432914e-02
+2023-10-31 00:22:56,581 train 000 5.159630e-01 75.000000
+2023-10-31 00:23:44,864 train 050 5.378548e-01 74.264706
+2023-10-31 00:24:24,683 train 100 5.249030e-01 74.381188
+2023-10-31 00:25:09,202 train 150 5.402318e-01 73.841060
+2023-10-31 00:25:30,881 train_acc 73.785714
+2023-10-31 00:25:35,741 valid 000 3.486633e+00 50.000000
+2023-10-31 00:27:42,605 valid 050 3.149205e+00 42.892157
+2023-10-31 00:28:49,890 valid_acc 45.000000
+2023-10-31 00:28:49,890 best_valid_acc 57.000000
+2023-10-31 00:28:49,947 epoch 20 lr 2.426409e-02
+2023-10-31 00:28:52,010 train 000 2.707981e-01 100.000000
+2023-10-31 00:29:39,397 train 050 5.641795e-01 73.284314
+2023-10-31 00:30:26,743 train 100 5.424608e-01 73.886139
+2023-10-31 00:31:11,045 train 150 5.483530e-01 73.427152
+2023-10-31 00:31:29,758 train_acc 74.000000
+2023-10-31 00:31:34,805 valid 000 3.571663e+00 50.000000
+2023-10-31 00:33:46,656 valid 050 3.163824e+00 54.901961
+2023-10-31 00:34:47,076 valid_acc 57.333333
+2023-10-31 00:34:47,146 best_valid_acc 57.333333
+2023-10-31 00:34:47,211 epoch 21 lr 2.419613e-02
+2023-10-31 00:34:48,877 train 000 4.380454e-01 87.500000
+2023-10-31 00:35:33,996 train 050 5.690381e-01 71.323529
+2023-10-31 00:36:17,821 train 100 5.536194e-01 72.896040
+2023-10-31 00:37:03,298 train 150 5.412305e-01 73.509934
+2023-10-31 00:37:24,690 train_acc 73.214286
+2023-10-31 00:37:31,085 valid 000 3.475419e+00 37.500000
+2023-10-31 00:39:42,229 valid 050 2.768454e+00 40.196078
+2023-10-31 00:40:45,803 valid_acc 38.500000
+2023-10-31 00:40:45,803 best_valid_acc 57.333333
+2023-10-31 00:40:45,867 epoch 22 lr 2.412528e-02
+2023-10-31 00:40:49,100 train 000 6.358339e-01 62.500000
+2023-10-31 00:41:30,697 train 050 5.389869e-01 75.735294
+2023-10-31 00:42:15,746 train 100 5.549313e-01 73.638614
+2023-10-31 00:43:06,276 train 150 5.556488e-01 73.509934
+2023-10-31 00:43:30,480 train_acc 73.500000
+2023-10-31 00:43:35,070 valid 000 4.008689e+00 37.500000
+2023-10-31 00:45:47,379 valid 050 2.958712e+00 57.352941
+2023-10-31 00:46:58,291 valid_acc 56.500000
+2023-10-31 00:46:58,291 best_valid_acc 57.333333
+2023-10-31 00:46:58,357 epoch 23 lr 2.405157e-02
+2023-10-31 00:47:00,665 train 000 5.254028e-01 75.000000
+2023-10-31 00:47:46,133 train 050 5.116237e-01 75.000000
+2023-10-31 00:48:30,692 train 100 5.368606e-01 74.381188
+2023-10-31 00:49:18,269 train 150 5.447511e-01 74.172185
+2023-10-31 00:49:38,781 train_acc 73.928571
+2023-10-31 00:49:45,423 valid 000 2.128096e+00 50.000000
+2023-10-31 00:52:05,426 valid 050 2.988354e+00 55.147059
+2023-10-31 00:53:04,054 valid_acc 52.666667
+2023-10-31 00:53:04,054 best_valid_acc 57.333333
+2023-10-31 00:53:04,120 epoch 24 lr 2.397501e-02
+2023-10-31 00:53:06,064 train 000 3.092493e-01 87.500000
+2023-10-31 00:53:49,386 train 050 5.467148e-01 74.264706
+2023-10-31 00:54:34,418 train 100 5.406858e-01 74.257426
+2023-10-31 00:55:23,307 train 150 5.520087e-01 73.013245
+2023-10-31 00:55:46,671 train_acc 73.285714
+2023-10-31 00:55:54,113 valid 000 3.574359e+00 37.500000
+2023-10-31 00:58:05,248 valid 050 3.024818e+00 54.166667
+2023-10-31 00:59:07,816 valid_acc 54.333333
+2023-10-31 00:59:07,816 best_valid_acc 57.333333
+2023-10-31 00:59:07,896 epoch 25 lr 2.389562e-02
+2023-10-31 00:59:09,931 train 000 7.698053e-01 62.500000
+2023-10-31 00:59:56,748 train 050 5.629092e-01 73.284314
+2023-10-31 01:00:38,298 train 100 5.462555e-01 73.638614
+2023-10-31 01:01:24,494 train 150 5.510611e-01 74.089404
+2023-10-31 01:01:45,194 train_acc 74.142857
+2023-10-31 01:01:49,620 valid 000 4.962280e+00 25.000000
+2023-10-31 01:03:55,591 valid 050 3.248556e+00 39.950980
+2023-10-31 01:05:06,374 valid_acc 41.666667
+2023-10-31 01:05:06,374 best_valid_acc 57.333333
+2023-10-31 01:05:06,438 epoch 26 lr 2.381341e-02
+2023-10-31 01:05:10,168 train 000 4.851320e-01 75.000000
+2023-10-31 01:05:53,424 train 050 5.727041e-01 69.852941
+2023-10-31 01:06:35,571 train 100 5.492415e-01 73.143564
+2023-10-31 01:07:24,746 train 150 5.405728e-01 73.923841
+2023-10-31 01:07:49,480 train_acc 73.714286
+2023-10-31 01:07:54,780 valid 000 2.199332e+00 37.500000
+2023-10-31 01:10:04,987 valid 050 3.293508e+00 27.941176
+2023-10-31 01:11:12,459 valid_acc 30.166667
+2023-10-31 01:11:12,459 best_valid_acc 57.333333
+2023-10-31 01:11:12,513 epoch 27 lr 2.372842e-02
+2023-10-31 01:11:14,377 train 000 5.435604e-01 75.000000
+2023-10-31 01:12:00,289 train 050 5.435733e-01 73.039216
+2023-10-31 01:12:49,525 train 100 5.440494e-01 72.772277
+2023-10-31 01:13:35,224 train 150 5.512137e-01 72.764901
+2023-10-31 01:13:53,949 train_acc 73.214286
+2023-10-31 01:14:02,659 valid 000 2.790683e+00 62.500000
+2023-10-31 01:16:11,373 valid 050 2.977457e+00 57.843137
+2023-10-31 01:17:15,644 valid_acc 57.333333
+2023-10-31 01:17:15,644 best_valid_acc 57.333333
+2023-10-31 01:17:15,695 epoch 28 lr 2.364065e-02
+2023-10-31 01:17:18,381 train 000 7.579164e-01 50.000000
+2023-10-31 01:18:03,870 train 050 5.805317e-01 70.343137
+2023-10-31 01:18:50,787 train 100 5.667571e-01 71.658416
+2023-10-31 01:19:37,518 train 150 5.550534e-01 72.599338
+2023-10-31 01:19:56,683 train_acc 73.000000
+2023-10-31 01:20:01,018 valid 000 5.128212e+00 25.000000
+2023-10-31 01:22:10,783 valid 050 3.058158e+00 56.127451
+2023-10-31 01:23:14,819 valid_acc 55.000000
+2023-10-31 01:23:14,819 best_valid_acc 57.333333
+2023-10-31 01:23:14,874 epoch 29 lr 2.355014e-02
+2023-10-31 01:23:17,178 train 000 3.143632e-01 87.500000
+2023-10-31 01:24:07,078 train 050 5.532212e-01 74.019608
+2023-10-31 01:24:46,347 train 100 5.447770e-01 74.009901
+2023-10-31 01:25:35,806 train 150 5.435498e-01 73.592715
+2023-10-31 01:25:57,950 train_acc 74.071429
+2023-10-31 01:26:02,241 valid 000 4.457584e+00 37.500000
+2023-10-31 01:28:08,860 valid 050 3.103168e+00 57.598039
+2023-10-31 01:29:16,116 valid_acc 57.166667
+2023-10-31 01:29:16,116 best_valid_acc 57.333333
+2023-10-31 01:29:16,183 epoch 30 lr 2.345691e-02
+2023-10-31 01:29:17,583 train 000 2.480911e-01 100.000000
+2023-10-31 01:30:03,694 train 050 5.385847e-01 75.245098
+2023-10-31 01:30:48,006 train 100 5.227479e-01 75.371287
+2023-10-31 01:31:31,781 train 150 5.399436e-01 73.923841
+2023-10-31 01:31:52,961 train_acc 73.357143
+2023-10-31 01:31:56,713 valid 000 3.086730e+00 25.000000
+2023-10-31 01:34:19,281 valid 050 3.446013e+00 26.470588
+2023-10-31 01:35:16,153 valid_acc 27.666667
+2023-10-31 01:35:16,154 best_valid_acc 57.333333
+2023-10-31 01:35:16,218 epoch 31 lr 2.336097e-02
+2023-10-31 01:35:18,663 train 000 6.705555e-01 62.500000
+2023-10-31 01:36:02,997 train 050 5.547369e-01 72.549020
+2023-10-31 01:36:49,931 train 100 5.486040e-01 72.648515
+2023-10-31 01:37:34,808 train 150 5.503443e-01 72.764901
+2023-10-31 01:37:55,969 train_acc 73.214286
+2023-10-31 01:37:59,796 valid 000 3.553203e+00 50.000000
+2023-10-31 01:40:15,259 valid 050 3.082976e+00 45.343137
+2023-10-31 01:41:22,407 valid_acc 45.833333
+2023-10-31 01:41:22,407 best_valid_acc 57.333333
+2023-10-31 01:41:22,500 epoch 32 lr 2.326235e-02
+2023-10-31 01:41:24,730 train 000 3.684537e-01 87.500000
+2023-10-31 01:42:12,004 train 050 5.664201e-01 71.078431
+2023-10-31 01:42:58,747 train 100 5.462868e-01 72.896040
+2023-10-31 01:43:40,690 train 150 5.307744e-01 74.420530
+2023-10-31 01:44:04,104 train_acc 73.642857
+2023-10-31 01:44:08,365 valid 000 3.863621e+00 12.500000
+2023-10-31 01:46:09,707 valid 050 3.235046e+00 24.019608
+2023-10-31 01:47:09,483 valid_acc 23.500000
+2023-10-31 01:47:09,484 best_valid_acc 57.333333
+2023-10-31 01:47:09,528 epoch 33 lr 2.316107e-02
+2023-10-31 01:47:11,564 train 000 7.583094e-01 50.000000
+2023-10-31 01:47:53,640 train 050 5.398097e-01 73.284314
+2023-10-31 01:48:35,068 train 100 5.421373e-01 74.009901
+2023-10-31 01:49:24,250 train 150 5.461594e-01 73.509934
+2023-10-31 01:49:46,298 train_acc 73.642857
+2023-10-31 01:49:50,954 valid 000 3.693080e+00 50.000000
+2023-10-31 01:51:50,147 valid 050 3.037200e+00 57.352941
+2023-10-31 01:52:46,373 valid_acc 56.500000
+2023-10-31 01:52:46,374 best_valid_acc 57.333333
+2023-10-31 01:52:46,441 epoch 34 lr 2.305717e-02
+2023-10-31 01:52:48,177 train 000 4.182803e-01 87.500000
+2023-10-31 01:53:29,349 train 050 5.200774e-01 76.470588
+2023-10-31 01:54:15,587 train 100 5.369274e-01 75.990099
+2023-10-31 01:54:58,063 train 150 5.465454e-01 73.841060
+2023-10-31 01:55:15,921 train_acc 74.142857
+2023-10-31 01:55:21,916 valid 000 2.834543e+00 62.500000
+2023-10-31 01:57:14,525 valid 050 3.003398e+00 56.127451
+2023-10-31 01:58:20,785 valid_acc 56.166667
+2023-10-31 01:58:20,785 best_valid_acc 57.333333
+2023-10-31 01:58:20,856 epoch 35 lr 2.295066e-02
+2023-10-31 01:58:22,974 train 000 3.988388e-01 87.500000
+2023-10-31 01:59:04,810 train 050 5.434299e-01 73.284314
+2023-10-31 01:59:47,167 train 100 5.413228e-01 73.886139
+2023-10-31 02:00:29,306 train 150 5.388885e-01 73.675497
+2023-10-31 02:00:49,020 train_acc 73.642857
+2023-10-31 02:00:54,900 valid 000 2.345387e+00 50.000000
+2023-10-31 02:02:59,331 valid 050 3.315338e+00 45.343137
+2023-10-31 02:03:53,738 valid_acc 46.833333
+2023-10-31 02:03:53,738 best_valid_acc 57.333333
+2023-10-31 02:03:53,802 epoch 36 lr 2.284158e-02
+2023-10-31 02:03:56,498 train 000 6.606806e-01 62.500000
+2023-10-31 02:04:38,303 train 050 5.613872e-01 73.774510
+2023-10-31 02:05:19,379 train 100 5.626207e-01 72.896040
+2023-10-31 02:06:01,353 train 150 5.490244e-01 73.344371
+2023-10-31 02:06:21,499 train_acc 73.428571
+2023-10-31 02:06:25,469 valid 000 2.155979e+00 62.500000
+2023-10-31 02:08:29,922 valid 050 3.415400e+00 46.078431
+2023-10-31 02:09:31,452 valid_acc 49.833333
+2023-10-31 02:09:31,452 best_valid_acc 57.333333
+2023-10-31 02:09:31,518 epoch 37 lr 2.272994e-02
+2023-10-31 02:09:33,372 train 000 5.629041e-01 75.000000
+2023-10-31 02:10:14,325 train 050 5.188353e-01 75.980392
+2023-10-31 02:10:59,161 train 100 5.332535e-01 73.762376
+2023-10-31 02:11:41,244 train 150 5.362879e-01 73.178808
+2023-10-31 02:12:00,862 train_acc 73.214286
+2023-10-31 02:12:07,022 valid 000 3.489445e+00 50.000000
+2023-10-31 02:14:09,453 valid 050 3.255917e+00 52.696078
+2023-10-31 02:15:01,480 valid_acc 54.833333
+2023-10-31 02:15:01,481 best_valid_acc 57.333333
+2023-10-31 02:15:01,535 epoch 38 lr 2.261578e-02
+2023-10-31 02:15:03,714 train 000 4.964340e-01 75.000000
+2023-10-31 02:15:46,194 train 050 5.144151e-01 74.019608
+2023-10-31 02:16:27,827 train 100 5.363798e-01 73.886139
+2023-10-31 02:17:09,328 train 150 5.447659e-01 72.433775
+2023-10-31 02:17:30,288 train_acc 72.214286
+2023-10-31 02:17:36,194 valid 000 1.078296e+00 75.000000
+2023-10-31 02:19:40,272 valid 050 2.928603e+00 52.450980
+2023-10-31 02:20:36,666 valid_acc 52.500000
+2023-10-31 02:20:36,666 best_valid_acc 57.333333
+2023-10-31 02:20:36,712 epoch 39 lr 2.249913e-02
+2023-10-31 02:20:40,213 train 000 4.911175e-01 75.000000
+2023-10-31 02:21:21,940 train 050 5.208743e-01 70.098039
+2023-10-31 02:22:05,113 train 100 5.299897e-01 71.163366
+2023-10-31 02:22:47,831 train 150 5.369238e-01 71.771523
+2023-10-31 02:23:07,970 train_acc 72.357143
+2023-10-31 02:23:12,623 valid 000 2.821739e+00 50.000000
+2023-10-31 02:25:26,230 valid 050 3.046064e+00 46.813725
+2023-10-31 02:26:21,945 valid_acc 45.500000
+2023-10-31 02:26:21,946 best_valid_acc 57.333333
+2023-10-31 02:26:21,996 epoch 40 lr 2.238001e-02
+2023-10-31 02:26:23,512 train 000 4.190070e-01 75.000000
+2023-10-31 02:27:04,023 train 050 5.054604e-01 75.000000
+2023-10-31 02:27:47,289 train 100 5.063801e-01 75.990099
+2023-10-31 02:28:31,280 train 150 5.285992e-01 74.586093
+2023-10-31 02:28:55,947 train_acc 74.571429
+2023-10-31 02:29:02,428 valid 000 2.202693e+00 62.500000
+2023-10-31 02:31:08,096 valid 050 3.026216e+00 40.196078
+2023-10-31 02:32:08,669 valid_acc 39.333333
+2023-10-31 02:32:08,669 best_valid_acc 57.333333
+2023-10-31 02:32:08,714 epoch 41 lr 2.225845e-02
+2023-10-31 02:32:10,754 train 000 9.127718e-01 62.500000
+2023-10-31 02:32:53,976 train 050 5.222184e-01 75.000000
+2023-10-31 02:33:35,266 train 100 5.261895e-01 74.257426
+2023-10-31 02:34:20,256 train 150 5.330932e-01 74.172185
+2023-10-31 02:34:39,753 train_acc 73.285714
+2023-10-31 02:34:45,539 valid 000 3.454235e+00 50.000000
+2023-10-31 02:36:47,760 valid 050 3.049748e+00 55.882353
+2023-10-31 02:37:43,855 valid_acc 56.000000
+2023-10-31 02:37:43,856 best_valid_acc 57.333333
+2023-10-31 02:37:43,913 epoch 42 lr 2.213448e-02
+2023-10-31 02:37:46,000 train 000 6.760032e-01 62.500000
+2023-10-31 02:38:29,764 train 050 5.403490e-01 75.000000
+2023-10-31 02:39:15,886 train 100 5.472837e-01 74.257426
+2023-10-31 02:39:56,315 train 150 5.554121e-01 72.682119
+2023-10-31 02:40:16,219 train_acc 73.214286
+2023-10-31 02:40:19,569 valid 000 4.069658e+00 37.500000
+2023-10-31 02:42:18,662 valid 050 3.037569e+00 55.882353
+2023-10-31 02:43:16,148 valid_acc 57.166667
+2023-10-31 02:43:16,148 best_valid_acc 57.333333
+2023-10-31 02:43:16,215 epoch 43 lr 2.200814e-02
+2023-10-31 02:43:19,461 train 000 7.187096e-01 62.500000
+2023-10-31 02:43:56,969 train 050 5.295092e-01 75.735294
+2023-10-31 02:44:40,661 train 100 5.360469e-01 74.009901
+2023-10-31 02:45:22,611 train 150 5.296371e-01 74.337748
+2023-10-31 02:45:41,681 train_acc 73.857143
+2023-10-31 02:45:46,806 valid 000 2.109681e+00 37.500000
+2023-10-31 02:47:44,944 valid 050 3.179975e+00 45.343137
+2023-10-31 02:48:49,255 valid_acc 45.166667
+2023-10-31 02:48:49,256 best_valid_acc 57.333333
+2023-10-31 02:48:49,318 epoch 44 lr 2.187945e-02
+2023-10-31 02:48:51,525 train 000 3.808178e-01 87.500000
+2023-10-31 02:49:39,173 train 050 5.320919e-01 73.039216
+2023-10-31 02:50:20,402 train 100 5.273827e-01 72.896040
+2023-10-31 02:51:02,283 train 150 5.460434e-01 72.516556
+2023-10-31 02:51:21,189 train_acc 73.571429
+2023-10-31 02:51:25,518 valid 000 4.499102e+00 37.500000
+2023-10-31 02:53:25,948 valid 050 3.117681e+00 52.205882
+2023-10-31 02:54:28,524 valid_acc 52.333333
+2023-10-31 02:54:28,524 best_valid_acc 57.333333
+2023-10-31 02:54:28,580 epoch 45 lr 2.174845e-02
+2023-10-31 02:54:30,372 train 000 2.765960e-01 87.500000
+2023-10-31 02:55:14,969 train 050 5.638555e-01 70.588235
+2023-10-31 02:55:55,059 train 100 5.209425e-01 73.762376
+2023-10-31 02:56:37,418 train 150 5.301349e-01 74.006623
+2023-10-31 02:57:01,227 train_acc 73.071429
+2023-10-31 02:57:06,525 valid 000 3.037293e+00 25.000000
+2023-10-31 02:59:03,741 valid 050 3.326854e+00 37.009804
+2023-10-31 03:00:02,100 valid_acc 37.833333
+2023-10-31 03:00:02,101 best_valid_acc 57.333333
+2023-10-31 03:00:02,165 epoch 46 lr 2.161517e-02
+2023-10-31 03:00:04,699 train 000 6.627975e-01 50.000000
+2023-10-31 03:00:51,887 train 050 5.689302e-01 70.833333
+2023-10-31 03:01:38,057 train 100 5.596665e-01 70.915842
+2023-10-31 03:02:18,401 train 150 5.338712e-01 73.096026
+2023-10-31 03:02:38,044 train_acc 73.285714
+2023-10-31 03:02:43,109 valid 000 1.782508e+00 75.000000
+2023-10-31 03:04:43,763 valid 050 2.825393e+00 58.578431
+2023-10-31 03:05:46,652 valid_acc 57.166667
+2023-10-31 03:05:46,652 best_valid_acc 57.333333
+2023-10-31 03:05:46,708 epoch 47 lr 2.147964e-02
+2023-10-31 03:05:50,467 train 000 3.556978e-01 87.500000
+2023-10-31 03:06:36,913 train 050 5.039914e-01 76.225490
+2023-10-31 03:07:19,892 train 100 5.349840e-01 74.009901
+2023-10-31 03:08:03,475 train 150 5.344008e-01 74.254967
+2023-10-31 03:08:23,089 train_acc 73.928571
+2023-10-31 03:08:30,499 valid 000 2.872593e+00 50.000000
+2023-10-31 03:10:26,534 valid 050 3.133350e+00 38.970588
+2023-10-31 03:11:33,760 valid_acc 38.666667
+2023-10-31 03:11:33,761 best_valid_acc 57.333333
+2023-10-31 03:11:33,824 epoch 48 lr 2.134190e-02
+2023-10-31 03:11:35,720 train 000 4.643692e-01 87.500000
+2023-10-31 03:12:17,058 train 050 5.341938e-01 74.019608
+2023-10-31 03:12:57,535 train 100 5.231896e-01 74.752475
+2023-10-31 03:13:39,986 train 150 5.285831e-01 73.509934
+2023-10-31 03:13:59,958 train_acc 73.071429
+2023-10-31 03:14:04,344 valid 000 3.023297e+00 50.000000
+2023-10-31 03:16:12,243 valid 050 3.300523e+00 51.225490
+2023-10-31 03:17:12,128 valid_acc 52.833333
+2023-10-31 03:17:12,128 best_valid_acc 57.333333
+2023-10-31 03:17:12,190 epoch 49 lr 2.120197e-02
+2023-10-31 03:17:16,513 train 000 4.346143e-01 75.000000
+2023-10-31 03:17:56,835 train 050 4.999487e-01 76.960784
+2023-10-31 03:18:40,806 train 100 5.275676e-01 75.247525
+2023-10-31 03:19:23,261 train 150 5.464683e-01 74.172185
+2023-10-31 03:19:43,985 train_acc 73.571429
+2023-10-31 03:19:47,961 valid 000 2.832195e+00 62.500000
+2023-10-31 03:21:49,908 valid 050 3.004765e+00 57.352941
+2023-10-31 03:22:47,821 valid_acc 55.666667
+2023-10-31 03:22:47,821 best_valid_acc 57.333333
+2023-10-31 03:22:47,884 epoch 50 lr 2.105990e-02
+2023-10-31 03:22:51,020 train 000 4.583854e-01 75.000000
+2023-10-31 03:23:31,943 train 050 5.337221e-01 72.549020
+2023-10-31 03:24:18,048 train 100 5.436825e-01 72.648515
+2023-10-31 03:24:57,871 train 150 5.431761e-01 72.682119
+2023-10-31 03:25:16,452 train_acc 73.214286
+2023-10-31 03:25:20,452 valid 000 2.901287e+00 62.500000
+2023-10-31 03:27:28,200 valid 050 3.169630e+00 53.431373
+2023-10-31 03:28:25,777 valid_acc 54.166667
+2023-10-31 03:28:25,777 best_valid_acc 57.333333
+2023-10-31 03:28:25,840 epoch 51 lr 2.091572e-02
+2023-10-31 03:28:27,522 train 000 4.988601e-01 62.500000
+2023-10-31 03:29:13,939 train 050 4.908318e-01 77.450980
+2023-10-31 03:29:55,799 train 100 5.232264e-01 75.371287
+2023-10-31 03:30:34,801 train 150 5.222632e-01 75.579470
+2023-10-31 03:30:55,221 train_acc 74.714286
+2023-10-31 03:30:59,685 valid 000 4.476433e+00 37.500000
+2023-10-31 03:33:01,224 valid 050 3.236284e+00 51.715686
+2023-10-31 03:34:06,723 valid_acc 52.666667
+2023-10-31 03:34:06,723 best_valid_acc 57.333333
+2023-10-31 03:34:06,786 epoch 52 lr 2.076946e-02
+2023-10-31 03:34:09,011 train 000 3.425497e-01 87.500000
+2023-10-31 03:34:55,861 train 050 5.165892e-01 74.754902
+2023-10-31 03:35:34,485 train 100 5.228040e-01 75.866337
+2023-10-31 03:36:16,629 train 150 5.339890e-01 74.337748
+2023-10-31 03:36:37,807 train_acc 73.785714
+2023-10-31 03:36:45,663 valid 000 2.480225e+00 62.500000
+2023-10-31 03:38:44,376 valid 050 2.777009e+00 57.352941
+2023-10-31 03:39:44,678 valid_acc 56.833333
+2023-10-31 03:39:44,679 best_valid_acc 57.333333
+2023-10-31 03:39:44,726 epoch 53 lr 2.062116e-02
+2023-10-31 03:39:45,872 train 000 2.681956e-01 100.000000
+2023-10-31 03:40:31,769 train 050 5.471331e-01 74.264706
+2023-10-31 03:41:12,762 train 100 5.468993e-01 73.886139
+2023-10-31 03:41:55,206 train 150 5.398251e-01 73.427152
+2023-10-31 03:42:18,389 train_acc 73.857143
+2023-10-31 03:42:21,884 valid 000 4.330058e+00 37.500000
+2023-10-31 03:44:23,639 valid 050 3.216238e+00 52.941176
+2023-10-31 03:45:27,557 valid_acc 55.000000
+2023-10-31 03:45:27,558 best_valid_acc 57.333333
+2023-10-31 03:45:27,620 epoch 54 lr 2.047086e-02
+2023-10-31 03:45:29,281 train 000 1.824022e-01 100.000000
+2023-10-31 03:46:12,795 train 050 4.756840e-01 78.676471
+2023-10-31 03:46:55,985 train 100 4.911730e-01 77.599010
+2023-10-31 03:47:36,588 train 150 5.170185e-01 75.082781
+2023-10-31 03:47:55,354 train_acc 74.500000
+2023-10-31 03:48:01,519 valid 000 3.366829e+00 50.000000
+2023-10-31 03:49:57,331 valid 050 2.877913e+00 56.862745
+2023-10-31 03:50:59,631 valid_acc 56.833333
+2023-10-31 03:50:59,632 best_valid_acc 57.333333
+2023-10-31 03:50:59,696 epoch 55 lr 2.031859e-02
+2023-10-31 03:51:02,566 train 000 9.107490e-01 50.000000
+2023-10-31 03:51:45,625 train 050 5.212728e-01 74.509804
+2023-10-31 03:52:24,722 train 100 5.248203e-01 74.752475
+2023-10-31 03:53:12,436 train 150 5.227959e-01 74.917219
+2023-10-31 03:53:31,890 train_acc 74.857143
+2023-10-31 03:53:35,601 valid 000 5.278012e+00 25.000000
+2023-10-31 03:55:41,070 valid 050 3.118279e+00 49.509804
+2023-10-31 03:56:43,873 valid_acc 49.500000
+2023-10-31 03:56:43,874 best_valid_acc 57.333333
+2023-10-31 03:56:43,926 epoch 56 lr 2.016440e-02
+2023-10-31 03:56:46,277 train 000 4.550473e-01 87.500000
+2023-10-31 03:57:25,008 train 050 4.975789e-01 76.715686
+2023-10-31 03:58:10,693 train 100 5.226127e-01 74.381188
+2023-10-31 03:58:57,040 train 150 5.322487e-01 74.420530
+2023-10-31 03:59:20,023 train_acc 74.642857
+2023-10-31 03:59:25,845 valid 000 3.438369e+00 37.500000
+2023-10-31 04:01:27,329 valid 050 3.052311e+00 47.058824
+2023-10-31 04:02:27,791 valid_acc 45.500000
+2023-10-31 04:02:27,791 best_valid_acc 57.333333
+2023-10-31 04:02:27,853 epoch 57 lr 2.000831e-02
+2023-10-31 04:02:29,382 train 000 6.403998e-01 62.500000
+2023-10-31 04:03:14,987 train 050 5.771851e-01 68.627451
+2023-10-31 04:03:54,204 train 100 5.508210e-01 71.905941
+2023-10-31 04:04:33,382 train 150 5.496916e-01 72.102649
+2023-10-31 04:04:55,262 train_acc 72.571429
+2023-10-31 04:05:02,104 valid 000 1.141512e+00 87.500000
+2023-10-31 04:07:05,584 valid 050 3.164932e+00 56.372549
+2023-10-31 04:08:04,768 valid_acc 56.666667
+2023-10-31 04:08:04,768 best_valid_acc 57.333333
+2023-10-31 04:08:04,831 epoch 58 lr 1.985038e-02
+2023-10-31 04:08:07,504 train 000 6.964825e-01 62.500000
+2023-10-31 04:08:51,321 train 050 5.234341e-01 73.039216
+2023-10-31 04:09:33,413 train 100 5.463236e-01 71.905941
+2023-10-31 04:10:13,914 train 150 5.321806e-01 72.682119
+2023-10-31 04:10:33,087 train_acc 73.214286
+2023-10-31 04:10:37,442 valid 000 4.318541e+00 25.000000
+2023-10-31 04:12:44,196 valid 050 3.229568e+00 40.196078
+2023-10-31 04:13:42,015 valid_acc 41.500000
+2023-10-31 04:13:42,015 best_valid_acc 57.333333
+2023-10-31 04:13:42,078 epoch 59 lr 1.969063e-02
+2023-10-31 04:13:43,512 train 000 6.276999e-01 75.000000
+2023-10-31 04:14:26,481 train 050 5.451117e-01 71.568627
+2023-10-31 04:15:09,535 train 100 5.310542e-01 73.019802
+2023-10-31 04:15:56,715 train 150 5.309737e-01 73.344371
+2023-10-31 04:16:18,158 train_acc 74.071429
+2023-10-31 04:16:24,461 valid 000 4.601952e+00 37.500000
+2023-10-31 04:18:28,610 valid 050 3.383643e+00 50.490196
+2023-10-31 04:19:29,805 valid_acc 52.333333
+2023-10-31 04:19:29,805 best_valid_acc 57.333333
+2023-10-31 04:19:29,850 epoch 60 lr 1.952910e-02
+2023-10-31 04:19:32,359 train 000 3.529855e-01 87.500000
+2023-10-31 04:20:15,002 train 050 5.430787e-01 73.039216
+2023-10-31 04:20:59,803 train 100 5.324523e-01 75.495050
+2023-10-31 04:21:39,795 train 150 5.270891e-01 74.420530
+2023-10-31 04:22:01,364 train_acc 73.428571
+2023-10-31 04:22:05,981 valid 000 4.338544e+00 37.500000
+2023-10-31 04:24:07,675 valid 050 3.285106e+00 53.431373
+2023-10-31 04:25:04,960 valid_acc 55.833333
+2023-10-31 04:25:04,960 best_valid_acc 57.333333
+2023-10-31 04:25:05,022 epoch 61 lr 1.936584e-02
+2023-10-31 04:25:08,503 train 000 6.105832e-01 62.500000
+2023-10-31 04:25:51,287 train 050 5.453884e-01 74.019608
+2023-10-31 04:26:38,621 train 100 5.437374e-01 74.133663
+2023-10-31 04:27:17,004 train 150 5.437267e-01 74.172185
+2023-10-31 04:27:36,764 train_acc 74.571429
+2023-10-31 04:27:42,295 valid 000 3.546358e+00 37.500000
+2023-10-31 04:29:46,136 valid 050 3.161711e+00 39.460784
+2023-10-31 04:30:40,311 valid_acc 40.333333
+2023-10-31 04:30:40,311 best_valid_acc 57.333333
+2023-10-31 04:30:40,376 epoch 62 lr 1.920089e-02
+2023-10-31 04:30:43,430 train 000 4.715690e-01 75.000000
+2023-10-31 04:31:24,737 train 050 5.370626e-01 74.019608
+2023-10-31 04:32:05,847 train 100 5.487147e-01 73.514851
+2023-10-31 04:32:57,023 train 150 5.588948e-01 72.102649
+2023-10-31 04:33:16,789 train_acc 72.714286
+2023-10-31 04:33:21,856 valid 000 1.968771e+00 75.000000
+2023-10-31 04:35:29,517 valid 050 2.945236e+00 57.843137
+2023-10-31 04:36:22,043 valid_acc 57.000000
+2023-10-31 04:36:22,043 best_valid_acc 57.333333
+2023-10-31 04:36:22,091 epoch 63 lr 1.903429e-02
+2023-10-31 04:36:24,154 train 000 7.518836e-01 62.500000
+2023-10-31 04:37:08,396 train 050 5.258626e-01 73.284314
+2023-10-31 04:37:49,671 train 100 5.418030e-01 72.277228
+2023-10-31 04:38:34,206 train 150 5.292119e-01 74.172185
+2023-10-31 04:38:57,902 train_acc 73.642857
+2023-10-31 04:39:01,964 valid 000 4.417460e+00 25.000000
+2023-10-31 04:41:06,518 valid 050 3.212457e+00 32.598039
+2023-10-31 04:42:04,612 valid_acc 33.166667
+2023-10-31 04:42:04,612 best_valid_acc 57.333333
+2023-10-31 04:42:04,678 epoch 64 lr 1.886607e-02
+2023-10-31 04:42:06,703 train 000 5.469429e-01 75.000000
+2023-10-31 04:42:46,687 train 050 5.449992e-01 72.794118
+2023-10-31 04:43:27,898 train 100 5.299470e-01 73.762376
+2023-10-31 04:44:12,095 train 150 5.309609e-01 74.420530
+2023-10-31 04:44:30,626 train_acc 73.928571
+2023-10-31 04:44:36,513 valid 000 2.810326e+00 50.000000
+2023-10-31 04:46:46,767 valid 050 2.993107e+00 43.872549
+2023-10-31 04:47:43,239 valid_acc 41.833333
+2023-10-31 04:47:43,239 best_valid_acc 57.333333
+2023-10-31 04:47:43,302 epoch 65 lr 1.869629e-02
+2023-10-31 04:47:45,328 train 000 5.183234e-01 75.000000
+2023-10-31 04:48:27,595 train 050 5.372897e-01 73.039216
+2023-10-31 04:49:14,836 train 100 5.412537e-01 73.514851
+2023-10-31 04:49:55,181 train 150 5.250744e-01 74.337748
+2023-10-31 04:50:15,905 train_acc 73.428571
+2023-10-31 04:50:21,094 valid 000 2.325086e+00 25.000000
+2023-10-31 04:52:23,400 valid 050 3.279994e+00 32.352941
+2023-10-31 04:53:27,351 valid_acc 31.000000
+2023-10-31 04:53:27,351 best_valid_acc 57.333333
+2023-10-31 04:53:27,413 epoch 66 lr 1.852498e-02
+2023-10-31 04:53:29,074 train 000 4.246927e-01 75.000000
+2023-10-31 04:54:13,272 train 050 5.590739e-01 72.303922
+2023-10-31 04:54:55,691 train 100 5.173069e-01 74.381188
+2023-10-31 04:55:42,627 train 150 5.298851e-01 73.509934
+2023-10-31 04:56:00,707 train_acc 74.000000
+2023-10-31 04:56:04,409 valid 000 3.691800e+00 50.000000
+2023-10-31 04:58:04,453 valid 050 3.158355e+00 47.058824
+2023-10-31 04:59:04,783 valid_acc 48.166667
+2023-10-31 04:59:04,783 best_valid_acc 57.333333
+2023-10-31 04:59:04,845 epoch 67 lr 1.835218e-02
+2023-10-31 04:59:06,473 train 000 4.655421e-01 75.000000
+2023-10-31 04:59:51,717 train 050 4.949443e-01 75.735294
+2023-10-31 05:00:34,795 train 100 5.271308e-01 74.009901
+2023-10-31 05:01:13,614 train 150 5.366647e-01 73.758278
+2023-10-31 05:01:36,427 train_acc 73.714286
+2023-10-31 05:01:42,112 valid 000 3.813149e+00 50.000000
+2023-10-31 05:03:45,335 valid 050 3.229285e+00 53.921569
+2023-10-31 05:04:44,413 valid_acc 54.666667
+2023-10-31 05:04:44,414 best_valid_acc 57.333333
+2023-10-31 05:04:44,459 epoch 68 lr 1.817794e-02
+2023-10-31 05:04:46,638 train 000 4.717040e-01 87.500000
+2023-10-31 05:05:27,462 train 050 5.335282e-01 74.019608
+2023-10-31 05:06:07,510 train 100 5.501271e-01 73.638614
+2023-10-31 05:06:49,009 train 150 5.326160e-01 74.420530
+2023-10-31 05:07:09,638 train_acc 75.000000
+2023-10-31 05:07:15,988 valid 000 2.864770e+00 50.000000
+2023-10-31 05:09:16,004 valid 050 3.210554e+00 52.941176
+2023-10-31 05:10:18,531 valid_acc 52.166667
+2023-10-31 05:10:18,532 best_valid_acc 57.333333
+2023-10-31 05:10:18,595 epoch 69 lr 1.800229e-02
+2023-10-31 05:10:20,264 train 000 7.225085e-01 62.500000
+2023-10-31 05:11:00,882 train 050 5.437613e-01 74.019608
+2023-10-31 05:11:42,556 train 100 5.327131e-01 74.628713
+2023-10-31 05:12:27,336 train 150 5.202955e-01 74.751656
+2023-10-31 05:12:49,027 train_acc 73.500000
+2023-10-31 05:12:52,718 valid 000 3.825330e+00 0.000000
+2023-10-31 05:14:55,939 valid 050 3.272187e+00 22.794118
+2023-10-31 05:15:54,967 valid_acc 22.166667
+2023-10-31 05:15:54,968 best_valid_acc 57.333333
+2023-10-31 05:15:55,032 epoch 70 lr 1.782530e-02
+2023-10-31 05:15:56,801 train 000 4.316892e-01 100.000000
+2023-10-31 05:16:41,066 train 050 5.230552e-01 74.509804
+2023-10-31 05:17:22,873 train 100 5.288183e-01 73.886139
+2023-10-31 05:18:06,237 train 150 5.420179e-01 73.178808
+2023-10-31 05:18:28,134 train_acc 73.571429
+2023-10-31 05:18:33,349 valid 000 2.657078e+00 62.500000
+2023-10-31 05:20:32,670 valid 050 3.244564e+00 52.941176
+2023-10-31 05:21:28,856 valid_acc 53.666667
+2023-10-31 05:21:28,857 best_valid_acc 57.333333
+2023-10-31 05:21:28,923 epoch 71 lr 1.764698e-02
+2023-10-31 05:21:32,135 train 000 4.586517e-01 62.500000
+2023-10-31 05:22:15,173 train 050 5.064107e-01 74.509804
+2023-10-31 05:22:57,972 train 100 5.116815e-01 75.495050
+2023-10-31 05:23:36,742 train 150 5.121947e-01 75.413907
+2023-10-31 05:23:56,337 train_acc 74.857143
+2023-10-31 05:24:01,387 valid 000 5.219387e+00 25.000000
+2023-10-31 05:26:05,932 valid 050 3.101542e+00 55.882353
+2023-10-31 05:26:59,031 valid_acc 55.833333
+2023-10-31 05:26:59,031 best_valid_acc 57.333333
+2023-10-31 05:26:59,096 epoch 72 lr 1.746740e-02
+2023-10-31 05:27:02,464 train 000 7.930856e-01 50.000000
+2023-10-31 05:27:45,173 train 050 5.379547e-01 72.549020
+2023-10-31 05:28:24,691 train 100 5.339638e-01 72.896040
+2023-10-31 05:29:06,309 train 150 5.320210e-01 73.592715
+2023-10-31 05:29:26,618 train_acc 73.071429
+2023-10-31 05:29:31,661 valid 000 4.590256e+00 12.500000
+2023-10-31 05:31:29,010 valid 050 3.164383e+00 24.019608
+2023-10-31 05:32:26,963 valid_acc 23.500000
+2023-10-31 05:32:26,964 best_valid_acc 57.333333
+2023-10-31 05:32:27,031 epoch 73 lr 1.728660e-02
+2023-10-31 05:32:30,230 train 000 4.733525e-01 75.000000
+2023-10-31 05:33:13,188 train 050 5.853214e-01 71.568627
+2023-10-31 05:33:56,631 train 100 5.554675e-01 73.391089
+2023-10-31 05:34:36,190 train 150 5.398962e-01 74.668874
+2023-10-31 05:34:55,185 train_acc 74.571429
+2023-10-31 05:35:00,114 valid 000 3.510143e+00 50.000000
+2023-10-31 05:37:02,640 valid 050 3.305058e+00 41.421569
+2023-10-31 05:38:06,067 valid_acc 41.833333
+2023-10-31 05:38:06,067 best_valid_acc 57.333333
+2023-10-31 05:38:06,113 epoch 74 lr 1.710461e-02
+2023-10-31 05:38:08,465 train 000 4.457901e-01 87.500000
+2023-10-31 05:38:52,398 train 050 5.243408e-01 73.529412
+2023-10-31 05:39:30,993 train 100 5.270572e-01 74.257426
+2023-10-31 05:40:17,141 train 150 5.239065e-01 73.841060
+2023-10-31 05:40:37,580 train_acc 72.928571
+2023-10-31 05:40:42,752 valid 000 3.746619e+00 37.500000
+2023-10-31 05:42:45,492 valid 050 3.164812e+00 52.205882
+2023-10-31 05:43:44,566 valid_acc 53.666667
+2023-10-31 05:43:44,567 best_valid_acc 57.333333
+2023-10-31 05:43:44,710 epoch 75 lr 1.692149e-02
+2023-10-31 05:43:48,350 train 000 5.548426e-01 75.000000
+2023-10-31 05:44:28,706 train 050 5.174277e-01 76.470588
+2023-10-31 05:45:11,127 train 100 5.263532e-01 75.000000
+2023-10-31 05:45:55,740 train 150 5.346875e-01 74.006623
+2023-10-31 05:46:17,955 train_acc 73.428571
+2023-10-31 05:46:23,309 valid 000 1.981070e+00 75.000000
+2023-10-31 05:48:23,438 valid 050 3.047778e+00 52.941176
+2023-10-31 05:49:22,056 valid_acc 51.166667
+2023-10-31 05:49:22,057 best_valid_acc 57.333333
+2023-10-31 05:49:22,122 epoch 76 lr 1.673728e-02
+2023-10-31 05:49:24,890 train 000 4.970708e-01 62.500000
+2023-10-31 05:50:06,651 train 050 5.243396e-01 74.509804
+2023-10-31 05:50:48,772 train 100 5.289769e-01 74.133663
+2023-10-31 05:51:30,538 train 150 5.376904e-01 73.427152
+2023-10-31 05:51:50,834 train_acc 73.714286
+2023-10-31 05:51:56,430 valid 000 2.717123e+00 62.500000
+2023-10-31 05:53:59,907 valid 050 3.023031e+00 57.107843
+2023-10-31 05:54:55,295 valid_acc 56.333333
+2023-10-31 05:54:55,295 best_valid_acc 57.333333
+2023-10-31 05:54:55,341 epoch 77 lr 1.655202e-02
+2023-10-31 05:54:58,189 train 000 4.016122e-01 75.000000
+2023-10-31 05:55:39,757 train 050 5.222037e-01 75.735294
+2023-10-31 05:56:21,943 train 100 5.338984e-01 74.628713
+2023-10-31 05:57:09,749 train 150 5.377105e-01 74.006623
+2023-10-31 05:57:27,772 train_acc 73.857143
+2023-10-31 05:57:31,311 valid 000 6.103573e+00 12.500000
+2023-10-31 05:59:34,774 valid 050 3.284573e+00 42.156863
+2023-10-31 06:00:33,540 valid_acc 43.166667
+2023-10-31 06:00:33,540 best_valid_acc 57.333333
+2023-10-31 06:00:33,593 epoch 78 lr 1.636576e-02
+2023-10-31 06:00:35,466 train 000 4.812068e-01 75.000000
+2023-10-31 06:01:19,004 train 050 5.288628e-01 74.509804
+2023-10-31 06:02:00,839 train 100 5.318584e-01 74.133663
+2023-10-31 06:02:40,796 train 150 5.193548e-01 75.662252
+2023-10-31 06:03:03,228 train_acc 76.142857
+2023-10-31 06:03:07,838 valid 000 2.316143e+00 62.500000
+2023-10-31 06:05:12,715 valid 050 3.432669e+00 41.911765
+2023-10-31 06:06:11,675 valid_acc 44.000000
+2023-10-31 06:06:11,675 best_valid_acc 57.333333
+2023-10-31 06:06:11,738 epoch 79 lr 1.617855e-02
+2023-10-31 06:06:13,728 train 000 4.355412e-01 75.000000
+2023-10-31 06:06:57,062 train 050 5.289866e-01 75.490196
+2023-10-31 06:07:39,384 train 100 5.374517e-01 73.638614
+2023-10-31 06:08:20,809 train 150 5.321088e-01 73.344371
+2023-10-31 06:08:41,320 train_acc 72.857143
+2023-10-31 06:08:47,155 valid 000 5.087675e+00 25.000000
+2023-10-31 06:10:47,841 valid 050 3.321758e+00 32.107843
+2023-10-31 06:11:43,305 valid_acc 34.000000
+2023-10-31 06:11:43,306 best_valid_acc 57.333333
+2023-10-31 06:11:43,369 epoch 80 lr 1.599044e-02
+2023-10-31 06:11:47,807 train 000 5.297994e-01 75.000000
+2023-10-31 06:12:32,279 train 050 5.379065e-01 72.794118
+2023-10-31 06:13:16,265 train 100 5.355057e-01 73.391089
+2023-10-31 06:13:54,150 train 150 5.224994e-01 73.592715
+2023-10-31 06:14:15,236 train_acc 73.785714
+2023-10-31 06:14:18,051 valid 000 5.324943e+00 25.000000
+2023-10-31 06:16:27,585 valid 050 3.341384e+00 43.137255
+2023-10-31 06:17:19,271 valid_acc 45.166667
+2023-10-31 06:17:19,272 best_valid_acc 57.333333
+2023-10-31 06:17:19,336 epoch 81 lr 1.580146e-02
+2023-10-31 06:17:21,912 train 000 4.980405e-01 75.000000
+2023-10-31 06:18:03,882 train 050 5.368214e-01 74.264706
+2023-10-31 06:18:47,155 train 100 5.239857e-01 74.628713
+2023-10-31 06:19:29,072 train 150 5.273689e-01 74.834437
+2023-10-31 06:19:49,797 train_acc 74.500000
+2023-10-31 06:19:54,388 valid 000 4.695121e+00 25.000000
+2023-10-31 06:21:56,252 valid 050 3.324074e+00 51.470588
+2023-10-31 06:22:52,931 valid_acc 52.333333
+2023-10-31 06:22:52,931 best_valid_acc 57.333333
+2023-10-31 06:22:52,997 epoch 82 lr 1.561167e-02
+2023-10-31 06:22:55,550 train 000 6.528355e-01 75.000000
+2023-10-31 06:23:34,109 train 050 5.428349e-01 73.774510
+2023-10-31 06:24:17,945 train 100 5.437037e-01 72.524752
+2023-10-31 06:25:02,723 train 150 5.434582e-01 72.764901
+2023-10-31 06:25:32,181 train_acc 73.214286
+2023-10-31 06:25:35,959 valid 000 2.968805e+00 25.000000
+2023-10-31 06:27:45,088 valid 050 3.205664e+00 39.950980
+2023-10-31 06:28:49,251 valid_acc 40.166667
+2023-10-31 06:28:49,252 best_valid_acc 57.333333
+2023-10-31 06:28:49,297 epoch 83 lr 1.542111e-02
+2023-10-31 06:28:52,906 train 000 3.885408e-01 87.500000
+2023-10-31 06:29:33,257 train 050 5.123542e-01 74.509804
+2023-10-31 06:30:17,267 train 100 5.270122e-01 72.896040
+2023-10-31 06:30:59,137 train 150 5.301890e-01 73.344371
+2023-10-31 06:31:19,303 train_acc 73.857143
+2023-10-31 06:31:23,809 valid 000 5.540260e+00 12.500000
+2023-10-31 06:33:20,952 valid 050 3.158883e+00 45.588235
+2023-10-31 06:34:23,888 valid_acc 44.500000
+2023-10-31 06:34:23,889 best_valid_acc 57.333333
+2023-10-31 06:34:23,952 epoch 84 lr 1.522984e-02
+2023-10-31 06:34:26,828 train 000 7.021166e-01 50.000000
+2023-10-31 06:35:08,950 train 050 5.283806e-01 75.245098
+2023-10-31 06:35:54,699 train 100 5.356021e-01 74.504950
+2023-10-31 06:36:37,692 train 150 5.230800e-01 75.496689
+2023-10-31 06:36:58,936 train_acc 74.785714
+2023-10-31 06:37:04,294 valid 000 4.593131e+00 37.500000
+2023-10-31 06:39:07,372 valid 050 3.320281e+00 41.176471
+2023-10-31 06:40:03,836 valid_acc 42.000000
+2023-10-31 06:40:03,836 best_valid_acc 57.333333
+2023-10-31 06:40:03,882 epoch 85 lr 1.503789e-02
+2023-10-31 06:40:06,053 train 000 6.396292e-01 62.500000
+2023-10-31 06:40:47,254 train 050 5.253426e-01 73.284314
+2023-10-31 06:41:32,586 train 100 5.162086e-01 74.009901
+2023-10-31 06:42:13,472 train 150 5.265230e-01 74.172185
+2023-10-31 06:42:36,682 train_acc 74.357143
+2023-10-31 06:42:41,782 valid 000 2.037344e+00 75.000000
+2023-10-31 06:44:47,228 valid 050 3.427235e+00 40.931373
+2023-10-31 06:45:46,670 valid_acc 43.500000
+2023-10-31 06:45:46,670 best_valid_acc 57.333333
+2023-10-31 06:45:46,732 epoch 86 lr 1.484531e-02
+2023-10-31 06:45:49,779 train 000 6.215702e-01 50.000000
+2023-10-31 06:46:33,553 train 050 5.020948e-01 73.284314
+2023-10-31 06:47:18,476 train 100 5.201334e-01 72.772277
+2023-10-31 06:47:56,558 train 150 5.201803e-01 73.841060
+2023-10-31 06:48:16,707 train_acc 74.071429
+2023-10-31 06:48:24,278 valid 000 4.664328e+00 37.500000
+2023-10-31 06:50:28,836 valid 050 3.406667e+00 44.117647
+2023-10-31 06:51:26,395 valid_acc 44.333333
+2023-10-31 06:51:26,395 best_valid_acc 57.333333
+2023-10-31 06:51:26,448 epoch 87 lr 1.465216e-02
+2023-10-31 06:51:28,961 train 000 4.678067e-01 75.000000
+2023-10-31 06:52:11,488 train 050 5.120304e-01 75.245098
+2023-10-31 06:52:52,135 train 100 5.095649e-01 75.990099
+2023-10-31 06:53:32,572 train 150 5.298675e-01 74.089404
+2023-10-31 06:53:55,173 train_acc 74.285714
+2023-10-31 06:53:59,778 valid 000 1.214392e+00 87.500000
+2023-10-31 06:56:08,301 valid 050 3.303397e+00 46.078431
+2023-10-31 06:57:09,529 valid_acc 47.833333
+2023-10-31 06:57:09,529 best_valid_acc 57.333333
+2023-10-31 06:57:09,592 epoch 88 lr 1.445847e-02
+2023-10-31 06:57:11,751 train 000 3.910280e-01 75.000000
+2023-10-31 06:57:57,638 train 050 5.209982e-01 75.980392
+2023-10-31 06:58:37,274 train 100 5.332687e-01 74.876238
+2023-10-31 06:59:15,444 train 150 5.279576e-01 75.165563
+2023-10-31 06:59:40,856 train_acc 74.285714
+2023-10-31 06:59:46,290 valid 000 3.926772e+00 25.000000
+2023-10-31 07:01:43,919 valid 050 3.389721e+00 27.696078
+2023-10-31 07:02:41,932 valid_acc 26.666667
+2023-10-31 07:02:41,933 best_valid_acc 57.333333
+2023-10-31 07:02:41,986 epoch 89 lr 1.426431e-02
+2023-10-31 07:02:44,333 train 000 5.009142e-01 87.500000
+2023-10-31 07:03:22,869 train 050 5.460236e-01 73.774510
+2023-10-31 07:04:02,599 train 100 5.520241e-01 73.267327
+2023-10-31 07:04:47,119 train 150 5.293106e-01 74.503311
+2023-10-31 07:05:05,974 train_acc 74.857143
+2023-10-31 07:05:11,422 valid 000 3.974619e+00 37.500000
+2023-10-31 07:07:13,344 valid 050 3.432840e+00 37.745098
+2023-10-31 07:08:13,073 valid_acc 38.333333
+2023-10-31 07:08:13,073 best_valid_acc 57.333333
+2023-10-31 07:08:13,131 epoch 90 lr 1.406971e-02
+2023-10-31 07:08:16,232 train 000 1.013430e+00 50.000000
+2023-10-31 07:09:02,999 train 050 5.372870e-01 76.225490
+2023-10-31 07:09:42,432 train 100 5.328932e-01 75.123762
+2023-10-31 07:10:24,979 train 150 5.358056e-01 74.337748
+2023-10-31 07:10:46,116 train_acc 74.214286
+2023-10-31 07:10:51,062 valid 000 1.196632e+00 75.000000
+2023-10-31 07:12:52,595 valid 050 3.279299e+00 46.813725
+2023-10-31 07:13:55,133 valid_acc 47.333333
+2023-10-31 07:13:55,133 best_valid_acc 57.333333
+2023-10-31 07:13:55,197 epoch 91 lr 1.387472e-02
+2023-10-31 07:13:57,666 train 000 6.220007e-01 62.500000
+2023-10-31 07:14:41,763 train 050 5.328371e-01 74.264706
+2023-10-31 07:15:24,605 train 100 5.327469e-01 74.381188
+2023-10-31 07:16:04,220 train 150 5.328160e-01 73.675497
+2023-10-31 07:16:22,639 train_acc 74.000000
+2023-10-31 07:16:27,392 valid 000 5.160316e+00 25.000000
+2023-10-31 07:18:33,060 valid 050 3.224015e+00 41.421569
+2023-10-31 07:19:31,286 valid_acc 41.000000
+2023-10-31 07:19:31,287 best_valid_acc 57.333333
+2023-10-31 07:19:31,350 epoch 92 lr 1.367940e-02
+2023-10-31 07:19:33,155 train 000 4.693372e-01 87.500000
+2023-10-31 07:20:18,477 train 050 5.144820e-01 75.490196
+2023-10-31 07:21:00,096 train 100 5.112018e-01 75.618812
+2023-10-31 07:21:41,944 train 150 5.182175e-01 75.579470
+2023-10-31 07:22:04,233 train_acc 75.285714
+2023-10-31 07:22:08,532 valid 000 4.625059e+00 25.000000
+2023-10-31 07:24:11,551 valid 050 3.362920e+00 35.049020
+2023-10-31 07:25:11,670 valid_acc 37.333333
+2023-10-31 07:25:11,670 best_valid_acc 57.333333
+2023-10-31 07:25:11,734 epoch 93 lr 1.348378e-02
+2023-10-31 07:25:15,163 train 000 5.836040e-01 75.000000
+2023-10-31 07:26:02,829 train 050 5.517900e-01 70.343137
+2023-10-31 07:26:45,275 train 100 5.238505e-01 72.772277
+2023-10-31 07:27:25,532 train 150 5.157988e-01 74.668874
+2023-10-31 07:27:43,616 train_acc 74.142857
+2023-10-31 07:27:50,398 valid 000 2.194626e+00 50.000000
+2023-10-31 07:29:53,750 valid 050 3.395851e+00 42.892157
+2023-10-31 07:30:51,285 valid_acc 45.000000
+2023-10-31 07:30:51,286 best_valid_acc 57.333333
+2023-10-31 07:30:51,344 epoch 94 lr 1.328792e-02
+2023-10-31 07:30:52,937 train 000 4.782026e-01 87.500000
+2023-10-31 07:31:41,393 train 050 5.362737e-01 73.774510
+2023-10-31 07:32:23,280 train 100 5.321641e-01 74.133663
+2023-10-31 07:33:07,564 train 150 5.311525e-01 74.006623
+2023-10-31 07:33:27,052 train_acc 74.142857
+2023-10-31 07:33:32,789 valid 000 1.310764e+00 75.000000
+2023-10-31 07:35:28,138 valid 050 3.330533e+00 43.137255
+2023-10-31 07:36:27,467 valid_acc 44.666667
+2023-10-31 07:36:27,468 best_valid_acc 57.333333
+2023-10-31 07:36:27,535 epoch 95 lr 1.309187e-02
+2023-10-31 07:36:29,298 train 000 4.594789e-01 75.000000
+2023-10-31 07:37:12,369 train 050 5.375965e-01 73.039216
+2023-10-31 07:37:54,971 train 100 5.428861e-01 72.153465
+2023-10-31 07:38:40,428 train 150 5.374522e-01 73.013245
+2023-10-31 07:39:01,995 train_acc 73.785714
+2023-10-31 07:39:09,880 valid 000 3.626021e+00 50.000000
+2023-10-31 07:41:12,768 valid 050 3.278500e+00 47.303922
+2023-10-31 07:42:11,188 valid_acc 48.833333
+2023-10-31 07:42:11,188 best_valid_acc 57.333333
+2023-10-31 07:42:11,254 epoch 96 lr 1.289567e-02
+2023-10-31 07:42:14,061 train 000 3.972137e-01 75.000000
+2023-10-31 07:42:54,914 train 050 5.395010e-01 74.264706
+2023-10-31 07:43:38,069 train 100 5.487794e-01 72.896040
+2023-10-31 07:44:22,814 train 150 5.342456e-01 73.427152
+2023-10-31 07:44:42,042 train_acc 73.428571
+2023-10-31 07:44:48,015 valid 000 3.141022e+00 37.500000
+2023-10-31 07:46:48,792 valid 050 3.327536e+00 49.754902
+2023-10-31 07:47:48,525 valid_acc 50.000000
+2023-10-31 07:47:48,525 best_valid_acc 57.333333
+2023-10-31 07:47:48,589 epoch 97 lr 1.269938e-02
+2023-10-31 07:47:50,817 train 000 5.088167e-01 75.000000
+2023-10-31 07:48:31,356 train 050 5.664517e-01 71.323529
+2023-10-31 07:49:13,512 train 100 5.405466e-01 73.886139
+2023-10-31 07:49:59,081 train 150 5.264278e-01 74.172185
+2023-10-31 07:50:17,872 train_acc 74.571429
+2023-10-31 07:50:23,351 valid 000 3.051069e+00 25.000000
+2023-10-31 07:52:21,734 valid 050 3.377171e+00 40.686275
+2023-10-31 07:53:20,523 valid_acc 41.666667
+2023-10-31 07:53:20,524 best_valid_acc 57.333333
+2023-10-31 07:53:20,590 epoch 98 lr 1.250304e-02
+2023-10-31 07:53:23,305 train 000 6.309144e-01 75.000000
+2023-10-31 07:54:05,726 train 050 5.220700e-01 73.774510
+2023-10-31 07:54:49,124 train 100 5.244683e-01 73.019802
+2023-10-31 07:55:28,270 train 150 5.200935e-01 73.758278
+2023-10-31 07:55:48,756 train_acc 73.785714
+2023-10-31 07:55:53,985 valid 000 3.936729e+00 37.500000
+2023-10-31 07:57:50,252 valid 050 3.547338e+00 41.666667
+2023-10-31 07:58:50,592 valid_acc 44.166667
+2023-10-31 07:58:50,592 best_valid_acc 57.333333
+2023-10-31 07:58:50,656 epoch 99 lr 1.230669e-02
+2023-10-31 07:58:52,051 train 000 7.771319e-01 50.000000
+2023-10-31 07:59:38,758 train 050 5.537544e-01 72.058824
+2023-10-31 08:00:20,000 train 100 5.320754e-01 74.381188
+2023-10-31 08:01:02,557 train 150 5.321404e-01 74.337748
+2023-10-31 08:01:20,978 train_acc 74.142857
+2023-10-31 08:01:25,320 valid 000 2.077906e+00 62.500000
+2023-10-31 08:03:33,569 valid 050 3.171497e+00 46.323529
+2023-10-31 08:04:32,901 valid_acc 45.333333
+2023-10-31 08:04:32,901 best_valid_acc 57.333333
+2023-10-31 08:04:32,964 epoch 100 lr 1.211040e-02
+2023-10-31 08:04:35,437 train 000 4.463526e-01 75.000000
+2023-10-31 08:05:15,788 train 050 4.927816e-01 77.941176
+2023-10-31 08:05:54,771 train 100 5.229114e-01 76.361386
+2023-10-31 08:06:37,985 train 150 5.252017e-01 75.165563
+2023-10-31 08:07:00,565 train_acc 75.214286
+2023-10-31 08:07:06,335 valid 000 3.923889e+00 12.500000
+2023-10-31 08:09:03,591 valid 050 3.462931e+00 31.862745
+2023-10-31 08:10:03,117 valid_acc 33.166667
+2023-10-31 08:10:03,117 best_valid_acc 57.333333
+2023-10-31 08:10:03,162 epoch 101 lr 1.191420e-02
+2023-10-31 08:10:06,392 train 000 3.688109e-01 87.500000
+2023-10-31 08:10:48,707 train 050 4.729551e-01 78.186275
+2023-10-31 08:11:34,616 train 100 5.043030e-01 75.495050
+2023-10-31 08:12:16,023 train 150 5.198005e-01 74.089404
+2023-10-31 08:12:34,921 train_acc 73.642857
+2023-10-31 08:12:40,695 valid 000 2.158562e+00 37.500000
+2023-10-31 08:14:39,972 valid 050 3.182827e+00 46.323529
+2023-10-31 08:15:35,865 valid_acc 46.500000
+2023-10-31 08:15:35,865 best_valid_acc 57.333333
+2023-10-31 08:15:35,926 epoch 102 lr 1.171815e-02
+2023-10-31 08:15:39,815 train 000 7.188760e-01 50.000000
+2023-10-31 08:16:20,854 train 050 5.377302e-01 73.284314
+2023-10-31 08:17:00,803 train 100 5.307488e-01 72.648515
+2023-10-31 08:17:49,903 train 150 5.309264e-01 73.013245
+2023-10-31 08:18:07,882 train_acc 73.500000
+2023-10-31 08:18:12,642 valid 000 4.356294e+00 37.500000
+2023-10-31 08:20:23,377 valid 050 3.190434e+00 45.588235
+2023-10-31 08:21:17,936 valid_acc 45.500000
+2023-10-31 08:21:17,936 best_valid_acc 57.333333
+2023-10-31 08:21:18,010 epoch 103 lr 1.152229e-02
+2023-10-31 08:21:19,432 train 000 5.825422e-01 75.000000
+2023-10-31 08:22:03,411 train 050 5.687585e-01 70.833333
+2023-10-31 08:22:51,744 train 100 5.516644e-01 71.410891
+2023-10-31 08:23:30,726 train 150 5.396386e-01 72.516556
+2023-10-31 08:23:51,104 train_acc 73.571429
+2023-10-31 08:23:57,407 valid 000 2.840296e+00 62.500000
+2023-10-31 08:26:15,738 valid 050 3.208583e+00 48.774510
+2023-10-31 08:27:12,559 valid_acc 49.500000
+2023-10-31 08:27:12,560 best_valid_acc 57.333333
+2023-10-31 08:27:12,622 epoch 104 lr 1.132668e-02
+2023-10-31 08:27:14,493 train 000 4.134769e-01 87.500000
+2023-10-31 08:27:56,452 train 050 5.225328e-01 75.735294
+2023-10-31 08:28:44,099 train 100 5.250927e-01 74.257426
+2023-10-31 08:29:26,410 train 150 5.183980e-01 74.006623
+2023-10-31 08:29:49,087 train_acc 73.857143
+2023-10-31 08:29:56,105 valid 000 2.902787e+00 50.000000
+2023-10-31 08:31:59,541 valid 050 3.244276e+00 54.411765
+2023-10-31 08:32:54,561 valid_acc 54.500000
+2023-10-31 08:32:54,562 best_valid_acc 57.333333
+2023-10-31 08:32:54,629 epoch 105 lr 1.113135e-02
+2023-10-31 08:32:57,617 train 000 3.584429e-01 87.500000
+2023-10-31 08:33:36,802 train 050 4.981364e-01 77.696078
+2023-10-31 08:34:23,524 train 100 5.217674e-01 76.237624
+2023-10-31 08:35:03,585 train 150 5.228795e-01 75.331126
+2023-10-31 08:35:23,247 train_acc 74.785714
+2023-10-31 08:35:32,257 valid 000 2.812484e+00 62.500000
+2023-10-31 08:37:30,205 valid 050 3.171553e+00 50.490196
+2023-10-31 08:38:25,758 valid_acc 49.500000
+2023-10-31 08:38:25,759 best_valid_acc 57.333333
+2023-10-31 08:38:25,821 epoch 106 lr 1.093637e-02
+2023-10-31 08:38:27,631 train 000 7.941307e-01 62.500000
+2023-10-31 08:39:13,149 train 050 5.112920e-01 75.980392
+2023-10-31 08:39:52,245 train 100 5.139253e-01 75.371287
+2023-10-31 08:40:36,370 train 150 5.180395e-01 74.834437
+2023-10-31 08:40:56,573 train_acc 74.500000
+2023-10-31 08:41:03,414 valid 000 4.028609e+00 37.500000
+2023-10-31 08:43:05,667 valid 050 3.383512e+00 35.049020
+2023-10-31 08:44:04,993 valid_acc 34.500000
+2023-10-31 08:44:04,993 best_valid_acc 57.333333
+2023-10-31 08:44:05,056 epoch 107 lr 1.074176e-02
+2023-10-31 08:44:07,999 train 000 5.811120e-01 87.500000
+2023-10-31 08:44:56,948 train 050 5.565068e-01 68.627451
+2023-10-31 08:45:38,453 train 100 5.438020e-01 70.792079
+2023-10-31 08:46:22,544 train 150 5.331745e-01 72.268212
+2023-10-31 08:46:40,993 train_acc 73.142857
+2023-10-31 08:46:47,333 valid 000 3.902085e+00 25.000000
+2023-10-31 08:48:50,306 valid 050 3.050843e+00 58.088235
+2023-10-31 08:49:43,341 valid_acc 54.833333
+2023-10-31 08:49:43,342 best_valid_acc 57.333333
+2023-10-31 08:49:43,408 epoch 108 lr 1.054760e-02
+2023-10-31 08:49:45,811 train 000 6.916435e-01 50.000000
+2023-10-31 08:50:27,286 train 050 5.292992e-01 73.529412
+2023-10-31 08:51:10,703 train 100 5.333973e-01 72.400990
+2023-10-31 08:51:52,921 train 150 5.283930e-01 73.509934
+2023-10-31 08:52:13,926 train_acc 73.714286
+2023-10-31 08:52:19,669 valid 000 3.889955e+00 37.500000
+2023-10-31 08:54:27,347 valid 050 3.256649e+00 45.588235
+2023-10-31 08:55:22,056 valid_acc 45.333333
+2023-10-31 08:55:22,056 best_valid_acc 57.333333
+2023-10-31 08:55:22,119 epoch 109 lr 1.035391e-02
+2023-10-31 08:55:24,189 train 000 4.091618e-01 75.000000
+2023-10-31 08:56:07,078 train 050 4.994312e-01 75.735294
+2023-10-31 08:56:48,579 train 100 5.014330e-01 75.866337
+2023-10-31 08:57:28,521 train 150 5.136710e-01 74.917219
+2023-10-31 08:57:47,418 train_acc 74.142857
+2023-10-31 08:57:54,375 valid 000 1.509949e+00 50.000000
+2023-10-31 09:00:03,160 valid 050 3.307468e+00 34.068627
+2023-10-31 09:00:59,297 valid_acc 32.333333
+2023-10-31 09:00:59,297 best_valid_acc 57.333333
+2023-10-31 09:00:59,344 epoch 110 lr 1.016076e-02
+2023-10-31 09:01:01,358 train 000 5.862050e-01 75.000000
+2023-10-31 09:01:42,473 train 050 5.099797e-01 73.774510
+2023-10-31 09:02:27,332 train 100 5.308175e-01 73.143564
+2023-10-31 09:03:12,591 train 150 5.315786e-01 72.930464
+2023-10-31 09:03:33,027 train_acc 73.571429
+2023-10-31 09:03:36,291 valid 000 3.902993e+00 50.000000
+2023-10-31 09:05:40,303 valid 050 3.460215e+00 38.235294
+2023-10-31 09:06:40,672 valid_acc 39.000000
+2023-10-31 09:06:40,673 best_valid_acc 57.333333
+2023-10-31 09:06:40,735 epoch 111 lr 9.968185e-03
+2023-10-31 09:06:42,163 train 000 2.835607e-01 87.500000
+2023-10-31 09:07:23,962 train 050 4.774518e-01 79.411765
+2023-10-31 09:08:06,825 train 100 4.971739e-01 77.351485
+2023-10-31 09:08:49,169 train 150 5.166586e-01 75.165563
+2023-10-31 09:09:08,560 train_acc 74.857143
+2023-10-31 09:09:16,137 valid 000 5.474156e-01 87.500000
+2023-10-31 09:11:13,495 valid 050 3.250429e+00 43.382353
+2023-10-31 09:12:18,620 valid_acc 41.833333
+2023-10-31 09:12:18,621 best_valid_acc 57.333333
+2023-10-31 09:12:18,683 epoch 112 lr 9.776235e-03
+2023-10-31 09:12:20,409 train 000 4.232682e-01 75.000000
+2023-10-31 09:13:01,688 train 050 5.070171e-01 74.264706
+2023-10-31 09:13:45,867 train 100 5.111238e-01 74.752475
+2023-10-31 09:14:25,546 train 150 5.107345e-01 75.165563
+2023-10-31 09:14:47,021 train_acc 74.428571
+2023-10-31 09:14:51,091 valid 000 2.213680e+00 62.500000
+2023-10-31 09:16:56,666 valid 050 3.404295e+00 41.421569
+2023-10-31 09:18:04,231 valid_acc 42.333333
+2023-10-31 09:18:04,231 best_valid_acc 57.333333
+2023-10-31 09:18:04,294 epoch 113 lr 9.584957e-03
+2023-10-31 09:18:05,876 train 000 4.870178e-01 62.500000
+2023-10-31 09:18:48,423 train 050 5.572030e-01 71.078431
+2023-10-31 09:19:33,778 train 100 5.361931e-01 72.772277
+2023-10-31 09:20:14,845 train 150 5.197011e-01 73.758278
+2023-10-31 09:20:33,883 train_acc 73.857143
+2023-10-31 09:20:38,254 valid 000 3.796690e+00 50.000000
+2023-10-31 09:22:39,287 valid 050 3.323652e+00 44.362745
+2023-10-31 09:23:46,021 valid_acc 44.000000
+2023-10-31 09:23:46,022 best_valid_acc 57.333333
+2023-10-31 09:23:46,066 epoch 114 lr 9.394400e-03
+2023-10-31 09:23:48,548 train 000 5.743064e-01 75.000000
+2023-10-31 09:24:27,846 train 050 4.678704e-01 77.941176
+2023-10-31 09:25:09,183 train 100 5.009775e-01 76.361386
+2023-10-31 09:25:52,376 train 150 5.196084e-01 75.000000
+2023-10-31 09:26:12,129 train_acc 74.428571
+2023-10-31 09:26:20,169 valid 000 2.164525e+00 62.500000
+2023-10-31 09:28:16,647 valid 050 3.238928e+00 48.529412
+2023-10-31 09:29:16,461 valid_acc 47.833333
+2023-10-31 09:29:16,462 best_valid_acc 57.333333
+2023-10-31 09:29:16,527 epoch 115 lr 9.204609e-03
+2023-10-31 09:29:19,128 train 000 7.194157e-01 62.500000
+2023-10-31 09:30:02,496 train 050 5.377317e-01 73.529412
+2023-10-31 09:30:46,557 train 100 5.443406e-01 73.391089
+2023-10-31 09:31:32,267 train 150 5.393362e-01 73.509934
+2023-10-31 09:31:52,833 train_acc 74.214286
+2023-10-31 09:31:56,889 valid 000 5.084874e+00 0.000000
+2023-10-31 09:34:02,647 valid 050 3.434185e+00 36.274510
+2023-10-31 09:35:09,699 valid_acc 37.833333
+2023-10-31 09:35:09,700 best_valid_acc 57.333333
+2023-10-31 09:35:09,762 epoch 116 lr 9.015633e-03
+2023-10-31 09:35:12,876 train 000 6.741470e-01 62.500000
+2023-10-31 09:35:54,581 train 050 5.411412e-01 73.529412
+2023-10-31 09:36:36,540 train 100 5.320288e-01 73.267327
+2023-10-31 09:37:17,190 train 150 5.312214e-01 73.344371
+2023-10-31 09:37:35,775 train_acc 73.785714
+2023-10-31 09:37:44,614 valid 000 2.838743e+00 62.500000
+2023-10-31 09:39:42,092 valid 050 3.282972e+00 51.225490
+2023-10-31 09:40:44,408 valid_acc 51.666667
+2023-10-31 09:40:44,409 best_valid_acc 57.333333
+2023-10-31 09:40:44,472 epoch 117 lr 8.827517e-03
+2023-10-31 09:40:47,503 train 000 4.943601e-01 75.000000
+2023-10-31 09:41:29,497 train 050 5.162301e-01 74.019608
+2023-10-31 09:42:11,720 train 100 5.295901e-01 74.257426
+2023-10-31 09:42:50,681 train 150 5.296357e-01 73.841060
+2023-10-31 09:43:15,361 train_acc 73.785714
+2023-10-31 09:43:20,385 valid 000 2.930221e+00 50.000000
+2023-10-31 09:45:22,998 valid 050 3.181875e+00 41.421569
+2023-10-31 09:46:22,271 valid_acc 39.166667
+2023-10-31 09:46:22,272 best_valid_acc 57.333333
+2023-10-31 09:46:22,339 epoch 118 lr 8.640307e-03
+2023-10-31 09:46:25,617 train 000 5.077519e-01 75.000000
+2023-10-31 09:47:06,743 train 050 4.841295e-01 76.470588
+2023-10-31 09:47:50,933 train 100 5.079476e-01 75.123762
+2023-10-31 09:48:32,286 train 150 5.202301e-01 74.254967
+2023-10-31 09:48:53,984 train_acc 74.357143
+2023-10-31 09:48:59,702 valid 000 3.723326e+00 37.500000
+2023-10-31 09:51:07,345 valid 050 3.287787e+00 50.735294
+2023-10-31 09:52:02,494 valid_acc 50.833333
+2023-10-31 09:52:02,494 best_valid_acc 57.333333
+2023-10-31 09:52:02,557 epoch 119 lr 8.454051e-03
+2023-10-31 09:52:04,739 train 000 7.481998e-01 50.000000
+2023-10-31 09:52:50,963 train 050 5.284610e-01 75.000000
+2023-10-31 09:53:31,523 train 100 5.243488e-01 75.371287
+2023-10-31 09:54:12,229 train 150 5.243305e-01 74.668874
+2023-10-31 09:54:32,196 train_acc 74.785714
+2023-10-31 09:54:36,853 valid 000 2.087344e+00 75.000000
+2023-10-31 09:56:40,390 valid 050 3.316661e+00 39.460784
+2023-10-31 09:57:44,467 valid_acc 37.500000
+2023-10-31 09:57:44,467 best_valid_acc 57.333333
+2023-10-31 09:57:44,536 epoch 120 lr 8.268793e-03
+2023-10-31 09:57:46,931 train 000 6.919611e-01 75.000000
+2023-10-31 09:58:29,203 train 050 5.150713e-01 75.000000
+2023-10-31 09:59:11,742 train 100 5.234881e-01 74.381188
+2023-10-31 09:59:53,298 train 150 5.186650e-01 74.006623
+2023-10-31 10:00:14,224 train_acc 73.857143
+2023-10-31 10:00:20,364 valid 000 2.880692e+00 50.000000
+2023-10-31 10:02:30,027 valid 050 3.252918e+00 51.225490
+2023-10-31 10:03:25,428 valid_acc 50.666667
+2023-10-31 10:03:25,428 best_valid_acc 57.333333
+2023-10-31 10:03:25,490 epoch 121 lr 8.084581e-03
+2023-10-31 10:03:27,444 train 000 7.232218e-01 62.500000
+2023-10-31 10:04:10,329 train 050 5.299783e-01 73.529412
+2023-10-31 10:04:56,001 train 100 5.223626e-01 74.257426
+2023-10-31 10:05:43,971 train 150 5.185739e-01 74.668874
+2023-10-31 10:06:03,849 train_acc 74.785714
+2023-10-31 10:06:07,210 valid 000 2.917763e+00 62.500000
+2023-10-31 10:08:09,391 valid 050 3.499450e+00 39.215686
+2023-10-31 10:09:10,941 valid_acc 42.833333
+2023-10-31 10:09:10,941 best_valid_acc 57.333333
+2023-10-31 10:09:11,004 epoch 122 lr 7.901458e-03
+2023-10-31 10:09:12,773 train 000 4.116835e-01 87.500000
+2023-10-31 10:09:51,502 train 050 5.035633e-01 76.960784
+2023-10-31 10:10:31,109 train 100 5.301573e-01 74.257426
+2023-10-31 10:11:18,321 train 150 5.339412e-01 74.172185
+2023-10-31 10:11:40,636 train_acc 75.071429
+2023-10-31 10:11:46,384 valid 000 2.965291e+00 62.500000
+2023-10-31 10:13:55,154 valid 050 3.360433e+00 43.627451
+2023-10-31 10:14:52,011 valid_acc 43.500000
+2023-10-31 10:14:52,011 best_valid_acc 57.333333
+2023-10-31 10:14:52,075 epoch 123 lr 7.719471e-03
+2023-10-31 10:14:54,709 train 000 4.759236e-01 75.000000
+2023-10-31 10:15:33,917 train 050 5.147492e-01 75.980392
+2023-10-31 10:16:16,282 train 100 5.013872e-01 76.361386
+2023-10-31 10:17:02,565 train 150 5.136256e-01 75.248344
+2023-10-31 10:17:22,020 train_acc 75.214286
+2023-10-31 10:17:28,031 valid 000 2.832490e+00 62.500000
+2023-10-31 10:19:34,113 valid 050 3.386904e+00 48.774510
+2023-10-31 10:20:29,128 valid_acc 50.166667
+2023-10-31 10:20:29,128 best_valid_acc 57.333333
+2023-10-31 10:20:29,193 epoch 124 lr 7.538664e-03
+2023-10-31 10:20:31,017 train 000 5.892798e-01 62.500000
+2023-10-31 10:21:12,023 train 050 5.271743e-01 75.245098
+2023-10-31 10:21:56,694 train 100 5.262510e-01 73.267327
+2023-10-31 10:22:44,547 train 150 5.227268e-01 73.013245
+2023-10-31 10:23:05,867 train_acc 73.428571
+2023-10-31 10:23:09,692 valid 000 5.356379e+00 25.000000
+2023-10-31 10:25:21,247 valid 050 3.149149e+00 49.754902
+2023-10-31 10:26:17,956 valid_acc 48.333333
+2023-10-31 10:26:17,956 best_valid_acc 57.333333
+2023-10-31 10:26:18,019 epoch 125 lr 7.359082e-03
+2023-10-31 10:26:20,213 train 000 2.800256e-01 100.000000
+2023-10-31 10:27:06,525 train 050 5.290978e-01 70.588235
+2023-10-31 10:27:47,115 train 100 5.310509e-01 72.153465
+2023-10-31 10:28:30,935 train 150 5.286060e-01 72.930464
+2023-10-31 10:28:48,954 train_acc 73.214286
+2023-10-31 10:28:53,307 valid 000 4.782858e+00 25.000000
+2023-10-31 10:30:54,917 valid 050 3.388387e+00 45.588235
+2023-10-31 10:31:54,127 valid_acc 44.833333
+2023-10-31 10:31:54,127 best_valid_acc 57.333333
+2023-10-31 10:31:54,172 epoch 126 lr 7.180769e-03
+2023-10-31 10:31:55,361 train 000 6.414810e-01 62.500000
+2023-10-31 10:32:37,673 train 050 5.005524e-01 75.490196
+2023-10-31 10:33:20,913 train 100 5.006204e-01 75.371287
+2023-10-31 10:34:06,666 train 150 5.206557e-01 74.254967
+2023-10-31 10:34:27,507 train_acc 74.428571
+2023-10-31 10:34:34,418 valid 000 2.983971e+00 50.000000
+2023-10-31 10:36:38,365 valid 050 3.440357e+00 33.578431
+2023-10-31 10:37:36,285 valid_acc 32.833333
+2023-10-31 10:37:36,286 best_valid_acc 57.333333
+2023-10-31 10:37:36,352 epoch 127 lr 7.003769e-03
+2023-10-31 10:37:39,575 train 000 7.059201e-01 62.500000
+2023-10-31 10:38:23,816 train 050 5.155086e-01 74.264706
+2023-10-31 10:39:09,868 train 100 4.907461e-01 76.237624
+2023-10-31 10:39:50,491 train 150 5.000041e-01 75.662252
+2023-10-31 10:40:11,071 train_acc 75.428571
+2023-10-31 10:40:14,708 valid 000 4.749118e+00 37.500000
+2023-10-31 10:42:32,551 valid 050 3.396245e+00 50.000000
+2023-10-31 10:43:29,996 valid_acc 50.166667
+2023-10-31 10:43:29,997 best_valid_acc 57.333333
+2023-10-31 10:43:30,059 epoch 128 lr 6.828127e-03
+2023-10-31 10:43:32,348 train 000 4.749150e-01 75.000000
+2023-10-31 10:44:14,118 train 050 5.063527e-01 75.000000
+2023-10-31 10:44:55,317 train 100 5.058753e-01 74.504950
+2023-10-31 10:45:38,285 train 150 5.135929e-01 74.668874
+2023-10-31 10:45:58,501 train_acc 74.785714
+2023-10-31 10:46:03,568 valid 000 3.813355e+00 37.500000
+2023-10-31 10:48:05,436 valid 050 3.428051e+00 38.725490
+2023-10-31 10:49:02,047 valid_acc 40.333333
+2023-10-31 10:49:02,047 best_valid_acc 57.333333
+2023-10-31 10:49:02,111 epoch 129 lr 6.653884e-03
+2023-10-31 10:49:05,239 train 000 3.640679e-01 87.500000
+2023-10-31 10:49:44,847 train 050 5.095858e-01 73.284314
+2023-10-31 10:50:29,661 train 100 5.236827e-01 73.019802
+2023-10-31 10:51:11,376 train 150 5.188988e-01 74.172185
+2023-10-31 10:51:31,222 train_acc 74.857143
+2023-10-31 10:51:36,725 valid 000 4.828448e+00 25.000000
+2023-10-31 10:53:42,317 valid 050 3.331660e+00 43.382353
+2023-10-31 10:54:40,243 valid_acc 41.333333
+2023-10-31 10:54:40,244 best_valid_acc 57.333333
+2023-10-31 10:54:40,312 epoch 130 lr 6.481084e-03
+2023-10-31 10:54:43,626 train 000 4.615884e-01 87.500000
+2023-10-31 10:55:25,050 train 050 5.099438e-01 76.225490
+2023-10-31 10:56:09,448 train 100 5.042802e-01 76.237624
+2023-10-31 10:56:51,107 train 150 5.103762e-01 75.745033
+2023-10-31 10:57:09,418 train_acc 75.142857
+2023-10-31 10:57:14,185 valid 000 2.152836e+00 75.000000
+2023-10-31 10:59:11,778 valid 050 3.336049e+00 40.686275
+2023-10-31 11:00:16,208 valid_acc 41.500000
+2023-10-31 11:00:16,208 best_valid_acc 57.333333
+2023-10-31 11:00:16,272 epoch 131 lr 6.309770e-03
+2023-10-31 11:00:18,382 train 000 6.864159e-01 50.000000
+2023-10-31 11:01:03,801 train 050 5.744786e-01 69.117647
+2023-10-31 11:01:44,383 train 100 5.395316e-01 72.772277
+2023-10-31 11:02:23,615 train 150 5.346260e-01 73.013245
+2023-10-31 11:02:42,586 train_acc 73.285714
+2023-10-31 11:02:47,002 valid 000 3.988081e+00 37.500000
+2023-10-31 11:04:48,536 valid 050 3.460287e+00 46.813725
+2023-10-31 11:05:50,177 valid_acc 48.666667
+2023-10-31 11:05:50,177 best_valid_acc 57.333333
+2023-10-31 11:05:50,247 epoch 132 lr 6.139985e-03
+2023-10-31 11:05:52,277 train 000 5.412658e-01 75.000000
+2023-10-31 11:06:33,214 train 050 5.091505e-01 73.039216
+2023-10-31 11:07:16,332 train 100 5.230080e-01 73.638614
+2023-10-31 11:07:59,327 train 150 5.159391e-01 74.254967
+2023-10-31 11:08:21,284 train_acc 74.142857
+2023-10-31 11:08:28,447 valid 000 5.045499e+00 25.000000
+2023-10-31 11:10:35,077 valid 050 3.609152e+00 36.764706
+2023-10-31 11:11:36,584 valid_acc 37.500000
+2023-10-31 11:11:36,585 best_valid_acc 57.333333
+2023-10-31 11:11:36,647 epoch 133 lr 5.971769e-03
+2023-10-31 11:11:38,460 train 000 7.600756e-01 62.500000
