@@ -1,4 +1,4 @@
-# AGNAS: Attention-Guided Micro- and Macro-Architecture Search (ICML 2022)
+# AGNAS: Attention-Guided Micro- and Macro-Architecture Search ()
 ![license](https://img.shields.io/badge/License-MIT-brightgreen)
 ![python](https://img.shields.io/badge/Python-3.7-blue)
 ![pytorch](https://img.shields.io/badge/PyTorch-1.1-orange)
